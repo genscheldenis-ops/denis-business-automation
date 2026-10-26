@@ -134,3 +134,7 @@ body{background:var(--bg);color:var(--ink)}
 @media(max-width:1070px){.hero-grid{grid-template-columns:1fr 1fr;gap:23px}.hero h1{font-size:clamp(46px,5.8vw,67px)}.proof-layout{gap:28px}.landing-price-cue{margin:0 24px}}
 @media(max-width:810px){.hero-grid,.proof-layout,.calc-shell{grid-template-columns:1fr}.hero-grid{padding-top:58px}.hero-visual{min-height:390px}.proof-first{padding:52px 0}.proof-video img{height:300px}.calc-results{border-top:1px solid #ecd49b}.early-price-inner,.landing-price-cue{flex-direction:column;align-items:stretch}.early-price-inner .btn,.landing-price-cue .btn{width:100%;text-align:center;justify-content:center}.landing-price-cue{transform:translateY(20px)}}
 @media(max-width:580px){.hero h1{font-size:clamp(41px,10vw,53px)}.hero .lead{font-size:15px}.proof-video{min-height:250px}.proof-video img{height:250px}.proof-actions .btn{width:100%;justify-content:center}.calc-inputs,.calc-results{padding:24px 22px}.calc-result-row strong{font-size:17px}.early-price{padding-top:7px}.early-price-inner{padding:25px 22px}.landing-price-cue{margin:0 15px;padding:18px}.service-card .service-action{margin-top:20px}}
+
+/* V4.1: Only the top hero background is changed to match the light practice section. */
+.hero { background: #fffefb; }
+.hero::before { display: none; }
