@@ -541,3 +541,47 @@ body { background: var(--bg); color: var(--ink); }
 
 /* Final mobile framing: display the entire branching agent diagram above the sticky CTA. */
 @media(max-width:650px){.ai-network-diagram{top:55%;}}
+
+/* V4.8: readable service numbers, explicitly example-based service and comparison cards */
+#leistungen .service-card .service-number {
+    font-size: 16px;
+    line-height: 1.35;
+    letter-spacing: .065em;
+    font-weight: 850;
+    color: #185C70;
+}
+#leistungen .service-card .service-photo { margin-top: 17px; }
+#leistungen .service-example-tag {
+    align-self: flex-start;
+    display: inline-flex;
+    margin: 0 0 9px;
+    color: #175A6C;
+    background: #E9F3F4;
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 13px;
+    line-height: 1.35;
+    font-weight: 800;
+    border: 1px solid #D3E5E8;
+}
+.example-notice {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: -7px 0 24px;
+    padding: 16px 20px;
+    border-left: 4px solid #185C70;
+    border-radius: 0 13px 13px 0;
+    background: #EDF5F5;
+    color: #2A3C42;
+    font-size: 15px;
+    line-height: 1.6;
+}
+.example-notice strong { font-size: 17px; line-height: 1.35; color: #185C70; }
+.example-notice span { color: #3E565D; }
+.comparison-note { margin-top: -10px; margin-bottom: 25px; }
+@media (max-width: 580px) {
+    #leistungen .service-card .service-number { font-size: 16px; }
+    .example-notice { padding: 14px 16px; margin-bottom: 18px; font-size: 14px; }
+    .example-notice strong { font-size: 16px; }
+}
