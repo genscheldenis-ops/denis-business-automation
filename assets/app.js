@@ -30,47 +30,72 @@
   dlg?.addEventListener('close', () => mount?.replaceChildren());
   dlg?.addEventListener('cancel', () => { mount?.querySelector('video')?.pause(); });
 
-  // Advertising measurement: basic opt-in mode. No Google request at all before permission.
+  // Google Ads – advanced opt-in: two separate purposes, no tag/script before consent.
+  // This is a lightweight custom consent interface, not a certified CMP.
+  // It must be verified against the actual Google Ads account and applicable policies.
   const adsReady = /^AW-\d+$/.test(cfg.googleAdsId || '') && !!(cfg.googleAdsConversionLabel || '').trim();
-  const consentKey = 'dg_business_ads_permission_v1';
-  let consent = null;
-  try { consent = localStorage.getItem(consentKey); } catch (_e) { /* storage blocked */ }
+  const consentKey = 'dg_business_privacy_v2';
+  let preferences = null;
+  try {
+    const saved = JSON.parse(localStorage.getItem(consentKey) || 'null');
+    if (saved && typeof saved.measurement === 'boolean' && typeof saved.remarketing === 'boolean') preferences = saved;
+  } catch (_e) { /* local storage may be unavailable */ }
   let tagLoaded = false;
   let banner;
-  const trackButtons = document.querySelectorAll('[data-privacy-settings]');
+  const settingsButtons = document.querySelectorAll('[data-privacy-settings]');
+  const hasTagConsent = () => !!(preferences?.measurement || preferences?.remarketing);
   function loadGoogleTag() {
-    if (!adsReady || consent !== 'yes' || tagLoaded) return;
+    if (!adsReady || !hasTagConsent() || tagLoaded) return;
     tagLoaded = true;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', {
+      ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied'
+    });
+    window.gtag('consent', 'update', {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: preferences.remarketing ? 'granted' : 'denied',
+      analytics_storage: 'denied'
+    });
     window.gtag('js', new Date());
-    window.gtag('set', 'allow_ad_personalization_signals', false);
-    window.gtag('config', cfg.googleAdsId);
-    const s = document.createElement('script'); s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(cfg.googleAdsId);
-    document.head.appendChild(s);
+    window.gtag('config', cfg.googleAdsId, { allow_ad_personalization_signals: !!preferences.remarketing });
+    const script = document.createElement('script'); script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(cfg.googleAdsId);
+    document.head.appendChild(script);
   }
-  function storeConsent(value) {
-    consent = value;
-    try { localStorage.setItem(consentKey, value); } catch (_e) { /* storage disabled */ }
-    if (banner) banner.remove();
-    if (value === 'yes') loadGoogleTag();
-    else if (tagLoaded) location.reload(); // ensures no more Google-tag execution after withdrawal
+  function storeConsent(measurement, remarketing) {
+    preferences = { measurement: !!measurement, remarketing: !!remarketing, savedAt: Date.now() };
+    try { localStorage.setItem(consentKey, JSON.stringify(preferences)); } catch (_e) {}
+    banner?.remove(); banner = null;
+    if (tagLoaded) {
+      // Reinitialise for changed purposes. Previously set third-party cookies require
+      // separate verification and deletion procedures for full withdrawal handling.
+      location.reload();
+    } else if (hasTagConsent()) loadGoogleTag();
   }
   function showConsent() {
-    if (!adsReady) return;
+    if (!adsReady) {
+      // Ads tag is not configured; no optional cookies from this site are active.
+      window.alert('Google-Ads-Tracking ist aktuell noch nicht verbunden. Es werden keine Google-Ads-Tags geladen.');
+      return;
+    }
     banner?.remove();
     banner = document.createElement('div'); banner.className = 'consent-banner';
-    banner.setAttribute('role', 'region'); banner.setAttribute('aria-label', 'Optionale Anzeigenmessung');
-    banner.innerHTML = '<div><strong>Optionale Anzeigenmessung</strong><p>Mit Ihrer Zustimmung verwenden wir Google Ads zur Messung erfolgreicher Kontaktanfragen. Die Website und das Formular funktionieren auch ohne Zustimmung. <a href="datenschutz.html">Datenschutz</a></p></div><div class="consent-actions"><button type="button" class="btn" data-consent-no>Ablehnen</button><button type="button" class="btn primary" data-consent-yes>Zustimmen</button></div>';
+    banner.setAttribute('role', 'region'); banner.setAttribute('aria-label', 'Datenschutzeinstellungen');
+    banner.innerHTML = `<div><div class="consent-heading">Datenschutzeinstellungen</div><p>Wir nutzen Google Ads nur mit Ihrer freiwilligen Einwilligung. Die beiden Zwecke sind getrennt wählbar. Ohne Einwilligung funktionieren Website und Anfrageformular uneingeschränkt. <a href="datenschutz.html">Datenschutzerklärung</a></p><div class="consent-options"><label><input type="checkbox" data-consent-measurement> Google Ads: erfolgreiche Anfragen messen</label><label><input type="checkbox" data-consent-remarketing> Google Ads: Remarketing und personalisierte Werbung</label></div></div><div class="consent-actions"><button type="button" class="btn" data-consent-no>Alle ablehnen</button><button type="button" class="btn" data-consent-all>Alle akzeptieren</button><button type="button" class="btn" data-consent-save>Auswahl speichern</button></div>`;
     document.body.appendChild(banner);
-    banner.querySelector('[data-consent-no]').addEventListener('click', () => storeConsent('no'));
-    banner.querySelector('[data-consent-yes]').addEventListener('click', () => storeConsent('yes'));
+    const m = banner.querySelector('[data-consent-measurement]');
+    const r = banner.querySelector('[data-consent-remarketing]');
+    m.checked = !!preferences?.measurement; r.checked = !!preferences?.remarketing;
+    banner.querySelector('[data-consent-no]').addEventListener('click', () => storeConsent(false,false));
+    banner.querySelector('[data-consent-all]').addEventListener('click', () => storeConsent(true,true));
+    banner.querySelector('[data-consent-save]').addEventListener('click', () => storeConsent(m.checked,r.checked));
   }
+  settingsButtons.forEach(btn => btn.addEventListener('click', showConsent));
   if (adsReady) {
-    trackButtons.forEach(btn => { btn.hidden = false; btn.addEventListener('click', showConsent); });
-    if (consent === 'yes') loadGoogleTag();
-    else if (consent !== 'no') showConsent();
+    if (preferences === null) showConsent();
+    else if (hasTagConsent()) loadGoogleTag();
   }
 
   // Contact form submits by HTTPS to Formspree; a server-accepted response is required.
@@ -117,7 +142,7 @@
   if (location.pathname.endsWith('/danke.html') || location.pathname.endsWith('danke.html')) {
     let sentAt = 0;
     try { sentAt = Number(sessionStorage.getItem('dg_form_sent_once') || 0); sessionStorage.removeItem('dg_form_sent_once'); } catch (_e) { /* storage disabled */ }
-    if (sentAt && (Date.now() - sentAt < 120000) && adsReady && consent === 'yes') {
+    if (sentAt && (Date.now() - sentAt < 120000) && adsReady && !!preferences?.measurement) {
       loadGoogleTag();
       window.gtag?.('event', 'conversion', { send_to: cfg.googleAdsId + '/' + cfg.googleAdsConversionLabel });
     }
