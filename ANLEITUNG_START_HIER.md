@@ -1,59 +1,31 @@
-# Denis Genschel – Business Automation · Website V2
+# Denis Genschel – Business Automation | Website V3 (Gelb-Weiß)
 
-Die Webseite ist für Cloudflare Pages + GitHub vorbereitet. **Sie ist noch nicht live und das Formular kann erst nach Eintragen Ihrer persönlichen Formspree-ID zustellen.** Google-Ads-Messung wird erst nach Eintragen von Conversion-ID/Label UND Einwilligung geladen.
+## Aktualisierungen
+- Vollständig neue Farbwelt: weiß, off-white, Buttergelb, goldgelber Verlauf; auch Hero, Call-to-Action und Innen-Seiten.
+- Echtes Impressum mit vollständiger Geschäftsanschrift, Telefonnummer, E-Mail und Unternehmerbezeichnung.
+- Datenschutzerklärung inhaltlich erweitert auf Cloudflare Workers, Formspree, externe Videos, Google Ads Conversion-Messung, separates Remarketing, Widerruf und Betroffenenrechte.
+- Tracking-Kontrollen: gleichwertige Schaltflächen „Alle ablehnen“ und „Alle akzeptieren“ plus separate Checkboxen und „Auswahl speichern“. Das Google-Tag wird **erst nach entsprechender Zustimmung** geladen; ein eingerichtetes Google-Konto ist erforderlich.
+- Preisgestaltung wie vereinbart: kostenloses Erstgespräch, Pilot 390–790 €, Implementierung 900–3.500 €, optionale Betreuung 99–390 €/Monat; Preise sind Orientierung, kein verbindliches Angebot.
 
-## A. Vor dem Upload: Dateien
-- Dieses ZIP entpacken.
-- **Nur den Inhalt** des Ordners `Denis_Genschel_Business_Automation_V2` in das neue GitHub-Repository hochladen: `index.html`, `anfrage.html`, `danke.html`, Dienstleistungsseiten, Rechtstexte, `assets/` mit `config.js`, `app.js`, `style.css`, Bildern.
-- **Nicht** die gesamte ZIP-Datei oder einen weiteren Oberordner ins Repository legen.
-- Altes Portfolio unter genscheldenis-ops.github.io **nicht** überschreiben.
+## In GitHub aktualisieren
+1. Den Inhalt dieser ZIP entpacken. Der Inhalt des Ordners `Denis_Genschel_Business_Automation_V3` enthält `index.html` und den Ordner `assets`.
+2. In GitHub Repository `denis-business-automation` auf `main` wechseln.
+3. Alle `.html`-Dateien im Repo-Hauptverzeichnis ersetzen; in `assets` die Dateien `style.css` und `app.js` ersetzen. Bilder dort nicht löschen.
+4. Commit durchführen. Beim passenden GitHub-Deployment zeigt Cloudflare das aktualisierte Design. Prüfe in Cloudflare unter Workers & Pages → dein Worker → Deployments, ob der Commit publiziert ist. **Der ZIP-Download alleine aktualisiert die Live-Seite nicht.**
 
-## B. Anfrageformular aktivieren – notwendig
-1. Eröffnen Sie ein Konto auf https://formspree.io/ .
-2. Neue Form erstellen, z.B. `Business Automation – Anfragen`.
-3. Die Ziel-E-Mail `genschel.denis@gmail.com` hinterlegen und die vom Anbieter geforderte Bestätigung abschließen.
-4. Im Formspree-Dashboard die **Form ID** kopieren (Beispiel: `abcd1234`, **kein geheimer API-Schlüssel**).
-5. In `assets/config.js` NUR `FORM_ID_EINTRAGEN` durch Ihre tatsächliche Form-ID ersetzen.
-6. Hochladen/Commit ausführen. Anschließend eine echte Testanfrage absenden, die E-Mail-Zustellung und den Eintrag im Formspree-Dashboard kontrollieren. Die `danke.html` darf **nur nach erfolgreicher HTTP-Rückmeldung** erscheinen.
-7. In Formspree Spamfilter/Domain-Limit bei Bedarf aktivieren, Benachrichtigungen prüfen, monatliches Formular-Limit beobachten. Der Gratis-Tarif ist derzeit für Tests/Entwicklung (50 Einsendungen/Monat) ausgewiesen, für ein produktives Geschäft ggf. kostenpflichtigen Plan einplanen.
-8. Ein Testformular nie mit realen Kundendaten befüllen.
+## Formspree einschalten
+In `assets/config.js` die Formular-ID von Formspree eintragen (nicht die Konto-ID, nicht einen geheimen Schlüssel), bei Formspree die Benachrichtigungsadresse verifizieren. Eine Testanfrage absenden und prüfen, ob der Eintrag im Formspree-Dashboard und die E-Mail ankommt. Das Formular funktioniert erst nach der Eingabe der echten Form-ID.
 
-**Wichtig**: Ohne Formspree-Konto und Ihre Form-ID kann kein Entwickler die Zustellung in Ihrem Namen aktivieren. Die Website zeigt dann eine Fehlermeldung samt E-Mail-Alternative, statt eine Zustellung vorzutäuschen.
+## Google Ads aktivieren
+In `assets/config.js` die öffentliche Google-Ads-ID `AW-...` und das Conversion-Label eintragen. Anschließend im Browser alle drei Consent-Optionen getrennt testen. Google Ads Conversion-Aktion anlegen und nur nach erfolgreichem Formularversand prüfen. Remarketing im Ads-Konto gesondert aktivieren/konfigurieren. Das eingebaute Interface ersetzt nicht die Prüfung der rechtlichen CMP-Anforderungen bzw. eventueller Google-Zertifizierungspflichten. Kein Tracking ohne Zustimmung. Bei Ablehnung wird kein Google-Tag geladen. Vorherige Cookie-Löschung bei einem späteren Widerruf muss abhängig von der finalen Google-Tag-Konfiguration überprüft werden.
 
-## C. Google Ads: Conversion-Tracking (erst später, Kontodaten erforderlich)
-1. In Google Ads unter Ziele/Conversions eine Website-Conversion **„Anfrage erfolgreich gesendet“** einrichten. Nicht den Klick auf den Anfrage-Button zählen.
-2. In der Tag-Einrichtung `AW-...` und das **Conversion-Label** ablesen.
-3. In `assets/config.js` `googleAdsId` und `googleAdsConversionLabel` ausfüllen.
-4. Auf der Website wird dann automatisch ein Auswahlfeld für optionale Anzeigenmessung sichtbar. Das Google-Tag wird **erst nach ausdrücklicher Einwilligung** geladen. Der Besucher kann die Einstellung über `Tracking-Einstellungen` im Footer ändern.
-5. Der Tracking-Event erfolgt auf `danke.html` **nur einmal nach einer zuvor erfolgreichen Formspree-Übermittlung**, und nur bei erteilter Einwilligung. Direkte Besuche von danke.html zählen nicht.
-6. Mit Google Tag Assistant und einem realen Formular-Test (ohne sensible Daten) den Event prüfen; Spam-/Testkonversionen bei der Kampagnenauswertung berücksichtigen.
-7. **Achtung:** Bei Ablehnung der Anzeigenmessung kann der Werbeklick technisch nicht als Conversion zugeordnet werden. Es ist keine vollständige Messung aller Website-Anfragen. Google Ads/Consent Mode v2, Ads-Cookies und Datenschutzhinweise müssen vor Kampagnenstart rechtlich und technisch kontrolliert werden; für umfassende Consent-Mode-Setups ist ggf. eine CMP sinnvoll.
+## Rechtliches vor dem Ads-Start prüfen
+- Die vom Nutzer als USt-IdNr. angegebene 11-stellige Nummer wurde aus Datenschutzgründen **nicht** veröffentlicht. Deutsche USt-IdNr. hat `DE` + 9 Ziffern. Steuer-ID und Steuernummer nicht einfach ins Impressum stellen. Wenn eine gültige USt-IdNr. oder Wirtschafts-Identifikationsnummer existiert, prüfen, ob und wie sie nach §5 DDG anzugeben ist.
+- Die Adresse ist öffentlich im Impressum (beabsichtigt). Prüfe, ob es sich um die echte ladungsfähige Geschäftsanschrift handelt.
+- Unternehmensstatus (Einzelunternehmen, ggf. Gewerbeanmeldung/Handelsregister) prüfen.
+- Im Cloudflare- und Formspree-Konto AV-Verträge, Datenregion, Log-/Datenaufbewahrung sowie internationale Transfers prüfen; Datenschutzerklärung an echte Einstellungen anpassen.
+- Google Ads: konkreter Tag, Zwecke, Cookies, Consent Mode v2 und erforderliche CMP-/Google-Policy-Compliance prüfen. Ein Datenschutzexperte sollte die fertige Erklärung abnehmen.
+- Falls Newsletter, Calendly, Google Fonts, Analytics oder andere Dienste später hinzugefügt werden, die Datenschutzerklärung ergänzen.
 
-## D. Neues GitHub-Repository erstellen
-1. https://github.com/new öffnen, als Nutzer `genscheldenis-ops`.
-2. Repository-Name z.B. `denis-business-automation` wählen. Es ist **ein eigenständiges zweites Repository** neben `genscheldenis-ops.github.io`.
-3. Public auswählen, `Create repository`.
-4. `Add file` → `Upload files`. **Inhalt** der hier bereitgestellten Website hochladen; Ordner `assets` muss seine Dateien enthalten. Bei Browser-Upload bei Bedarf Ordner per Drag&Drop hineinziehen, oder alle Dateien aus einem lokalen Git-Client pushen.
-5. Commit changes.
-
-## E. Cloudflare Pages mit GitHub verbinden
-1. https://dash.cloudflare.com/ öffnen → `Workers & Pages` → `Create application` → `Pages` → `Import an existing Git repository`/`Connect to Git` (Menübezeichnung kann variieren).
-2. GitHub-Verbindung autorisieren und **nur** das neue Repository `denis-business-automation` wählen.
-3. Production branch: `main`.
-4. Framework preset: `None` oder `No framework`.
-5. Build command: `exit 0` (oder leer, falls UI es zulässt), Build output directory: `.` (Root des Repositorys).
-6. `Save and Deploy` / `Deploy` auswählen.
-7. Cloudflare gibt Ihnen eine öffentliche Adresse wie `https://denis-business-automation.pages.dev` (Name ist nur beispielhaft; tatsächlichen Link ablesen). Sie benötigen noch keine eigene Domain.
-8. Jeder neue Commit auf `main` startet eine neue Bereitstellung.
-
-## F. Vor dem Werbestart zwingend prüfen
-- `impressum.html` enthält noch `[VOLLSTÄNDIGE LADUNGSFÄHIGE ANSCHRIFT ERGÄNZEN]` sowie weitere mögliche Pflichtangaben. Ausfüllen und rechtlich prüfen.
-- `datenschutz.html` ist weiterhin ein **rechtlicher Entwurf**: Datenempfänger, Formspree-Auftragsverarbeitung, Hosting, ggf. Drittlandverarbeitung, Tracking und Löschfristen konkretisieren. Vor Veröffentlichung finalisieren.
-- Preise wurden gemäß Ihrer Entscheidung **Variante A** beibehalten: Pilot 390–790 € einmalig, Umsetzung 900–3.500 € einmalig, Betreuung 99–390 €/Monat **optional**, jeweils individuelle Angebote, Softwarekosten separat.
-- Testen: Formular (auch Fehlerfall), mobile Navigation, HTTPS, Videos, Mail- und Telefonlinks, Datenschutz-/Impressumslinks, Google-Ads-Conversion erst nach Zustimmung.
-- Eine eigene Domain ist für den technischen Start **nicht zwingend**, für Anzeigen und eine professionelle Außenwirkung aber mittelfristig empfehlenswert.
-
-## Hilfreiche Anbieteranleitungen
-- Cloudflare Pages: https://developers.cloudflare.com/pages/get-started/git-integration/
-- Formspree AJAX: https://help.formspree.io/de/articles/building-your-form/submit-forms-with-javascript-ajax
-- Google Ads Conversion: https://developers.google.com/tag-platform/devguides/conversions?hl=de
+## Wichtiger Hinweis
+Die URL `https://denis-business-automation.genschel-denis.workers.dev` zeigt auf Cloudflare **Workers** (nicht Pages). Die Website-Bereitstellung lässt sich nur dann durch GitHub-Dateiänderungen aktualisieren, wenn dein Worker korrekt an das GitHub-Repository und dessen Build-/Deploy-Prozess gebunden ist. Sonst ist erneutes Deployment in Cloudflare erforderlich.
