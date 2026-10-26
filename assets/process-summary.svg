@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="280" viewBox="0 0 700 280" fill="none" role="img" aria-label="Grafik einer geordneten Zusammenarbeit vom Anliegen zum erfolgreichen Workflow">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="700" y2="280" gradientUnits="userSpaceOnUse"><stop stop-color="#EAF4FB"/><stop offset=".52" stop-color="#FFF7E5"/><stop offset="1" stop-color="#EBF5EF"/></linearGradient><filter id="s" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dy="9" stdDeviation="12" flood-color="#4D5B5F" flood-opacity=".10"/></filter></defs>
+<rect width="700" height="280" rx="27" fill="url(#bg)"/><circle cx="630" cy="15" r="120" fill="white" opacity=".4"/>
+<path d="M150 138H560" stroke="#B9C9BC" stroke-width="8" stroke-linecap="round" stroke-dasharray="8 16"/>
+<g filter="url(#s)"><rect x="49" y="85" width="160" height="114" rx="21" fill="white"/><rect x="270" y="85" width="160" height="114" rx="21" fill="white"/><rect x="491" y="85" width="160" height="114" rx="21" fill="white"/></g>
+<rect x="72" y="112" width="40" height="40" rx="10" fill="#D8ECFB"/><path d="M83 129h18m-18 8h12" stroke="#4F96CC" stroke-width="5" stroke-linecap="round"/>
+<rect x="121" y="117" width="66" height="8" rx="4" fill="#D6E1E9"/><rect x="121" y="133" width="45" height="7" rx="3" fill="#E6EEF3"/><rect x="121" y="146" width="55" height="7" rx="3" fill="#E6EEF3"/>
+<rect x="293" y="112" width="40" height="40" rx="10" fill="#FFF0C7"/><path d="M303 121h19v22h-19zM308 127h10m-10 6h10" stroke="#BB8436" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="344" y="117" width="63" height="8" rx="4" fill="#D6E1E9"/><rect x="344" y="133" width="55" height="7" rx="3" fill="#E6EEF3"/><rect x="344" y="146" width="38" height="7" rx="3" fill="#E6EEF3"/>
+<rect x="514" y="112" width="40" height="40" rx="10" fill="#D8F3E6"/><path d="m523 133 7 7 14-17" stroke="#248E66" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="565" y="117" width="63" height="8" rx="4" fill="#D6E1E9"/><rect x="565" y="133" width="53" height="7" rx="3" fill="#E6EEF3"/><rect x="565" y="146" width="44" height="7" rx="3" fill="#E6EEF3"/>
+<circle cx="238" cy="141" r="19" fill="#F8FAF5" stroke="#BFD6C9" stroke-width="2"/><path d="m231 141h14m-5-5 5 5-5 5" stroke="#6A9C82" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="459" cy="141" r="19" fill="#F8FAF5" stroke="#BFD6C9" stroke-width="2"/><path d="m452 141h14m-5-5 5 5-5 5" stroke="#6A9C82" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

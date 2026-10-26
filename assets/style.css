@@ -138,3 +138,23 @@ body{background:var(--bg);color:var(--ink)}
 /* V4.1: Only the top hero background is changed to match the light practice section. */
 .hero { background: #fffefb; }
 .hero::before { display: none; }
+
+/* V4.2: seven contextual card photos; elevated savings calculator; highlighted verified-as-personal project figures. */
+.service-photo{width:100%;aspect-ratio:940/405;height:auto;object-fit:cover;object-position:center;display:block;border-radius:15px;margin:19px 0 19px;border:1px solid #efe7d9;background:#f9f6ef}
+.service-card{min-height:0}
+.service-card h3{margin-top:1px}
+.service-card .arrow{padding-top:12px}
+.step-photo{width:100%;height:119px;object-fit:cover;display:block;border-radius:12px;margin:17px 0 4px;border:1px solid #eae4db;background:#f7f7f2}
+.step h3{margin-top:16px}
+.proof-stat{display:inline;box-decoration-break:clone;-webkit-box-decoration-break:clone;background:linear-gradient(transparent 52%,#ffe89e 52%);padding:0 2px;color:#312411!important;font-weight:900}
+#ersparnis{scroll-margin-top:93px}
+@media(max-width:810px){.step-photo{height:165px}}
+@media(max-width:580px){.service-photo{margin:16px 0 18px}.step-photo{height:180px}.service-card{min-height:0}}
+
+/* V4.2: process introduction graphic and more prominent honest case study results. */
+.process-summary{width:min(100%,350px);display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.process-summary-img{width:100%;height:auto;border-radius:14px;border:1px solid #e9e1d5;display:block}
+.section-head .process-summary p{font-size:13px;line-height:1.6;margin:0;color:#6c6151}
+#ablauf .section-head{align-items:center}
+.proof-copy .proof-stat{background:linear-gradient(105deg,#ffe3a0,#fff0bd);padding:1px 5px;border-radius:5px;font-size:1.035em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+@media(max-width:810px){.process-summary{width:min(100%,430px);margin-top:22px}}
