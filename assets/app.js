@@ -98,6 +98,33 @@
     else if (hasTagConsent()) loadGoogleTag();
   }
 
+
+  // Client-side savings model only. No external calls and no guarantees.
+  const calculator = document.getElementById('savingsCalculator');
+  if (calculator) {
+    const hours = calculator.querySelector('#hoursWeek');
+    const rate = calculator.querySelector('#hourlyCost');
+    const portion = calculator.querySelector('#shareAutomatable');
+    const shareLabel = calculator.querySelector('#shareValue');
+    const hoursOutput = calculator.querySelector('#savedHours');
+    const monthOutput = calculator.querySelector('#savedMonth');
+    const yearOutput = calculator.querySelector('#savedYear');
+    const formatEuro = n => new Intl.NumberFormat('de-DE', { style:'currency', currency:'EUR', maximumFractionDigits:0 }).format(n);
+    const formatHours = n => new Intl.NumberFormat('de-DE', {maximumFractionDigits:1, minimumFractionDigits:1}).format(n);
+    function updateSavings() {
+      const h = Math.min(168,Math.max(0, Number(hours.value) || 0));
+      const r = Math.min(500,Math.max(0, Number(rate.value) || 0));
+      const share = Math.min(100,Math.max(0,Number(portion.value) || 0));
+      const monthlyHours = h * share / 100 * (52 / 12);
+      shareLabel.textContent = share + ' %';
+      hoursOutput.textContent = formatHours(monthlyHours) + ' Std.';
+      monthOutput.textContent = formatEuro(monthlyHours * r);
+      yearOutput.textContent = formatEuro(h * share / 100 * 52 * r);
+    }
+    [hours,rate,portion].forEach(input => input.addEventListener('input', updateSavings));
+    updateSavings();
+  }
+
   // Contact form submits by HTTPS to Formspree; a server-accepted response is required.
   const form = document.getElementById('leadForm');
   if (form) {
@@ -133,7 +160,7 @@
       } catch (err) {
         message.textContent = 'Die Anfrage konnte nicht bestätigt werden: ' + (err?.message || 'Verbindungsfehler') + ' Alternativ erreichen Sie mich unter genschel.denis@gmail.com.';
         message.className = 'form-message error';
-        sending = false; submit.disabled = false; submit.textContent = 'Unverbindliche Anfrage absenden ↗';
+        sending = false; submit.disabled = false; submit.textContent = 'Kostenlose Einschätzung anfordern →';
       }
     });
   }
