@@ -4,7 +4,7 @@
    Google Ads: Erst nach Freigabe der Kampagne ID und Conversion-Label eintragen.
 */
 window.BUSINESS_AUTOMATION_CONFIG = Object.freeze({
-  formspreeId: "FORM_ID_EINTRAGEN",
+  formspreeId: "https://formspree.io/f/mzeeeeag",
   googleAdsId: "",                   // z.B. "AW-123456789", erst nach Consent geladen
   googleAdsConversionLabel: ""       // z.B. "AbCdEfGhIjK", aus Google Ads
 });
