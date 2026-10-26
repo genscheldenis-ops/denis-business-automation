@@ -515,3 +515,29 @@ body { background: var(--bg); color: var(--ink); }
 .story-desk-panel,.story-desk-stamp {opacity:clamp(0,calc(2 - var(--p)*7),1);}
 .story-automation-label {opacity:clamp(0,calc((var(--p) - .39)*5.5),1);}
 @media(prefers-reduced-motion:reduce){.story-automation-label{opacity:1;}}
+
+/* V4.7 — Make-inspired illustrated AI agent network, independent modules interconnected. */
+.ai-network-diagram{position:absolute;z-index:3;left:50%;top:59%;width:min(95vw,1400px);transform:translate(-50%,-50%);filter:drop-shadow(0 10px 18px rgba(40,81,95,.04));}
+.ai-network-diagram img{display:block;width:100%;height:auto;}
+.ai-network-mobile{display:none!important;}
+.story-automation-label{z-index:6;}
+/* The before/after illustration was previously almost full-page width.
+   Make it substantially smaller while preserving both halves of the image. */
+.hero-image-wide{max-width:920px!important;margin:clamp(32px,4vw,54px) auto 0;padding:0 16px;}
+.hero-image-frame{border-radius:20px;}
+.hero-image-caption{font-size:13px;}
+@media(max-width:1000px){.ai-network-diagram{width:99vw;top:61%;}.story-automation-label p{font-size:clamp(28px,4vw,42px);}}
+@media(max-width:650px){
+ .ai-network-diagram{width:min(100vw,450px);top:63%;}
+ .ai-network-desktop{display:none!important;}
+ .ai-network-mobile{display:block!important;}
+ .story-automation-label{top:18px;}
+ .story-automation-label p{font-size:clamp(25px,6.5vw,33px);margin-top:10px;}
+ .story-automation-foot{font-size:10px;bottom:8px;padding:0 20px;}
+ .hero-image-wide{max-width:450px!important;padding:0 18px;}
+ .hero-mobile-comparison img{height:175px;}
+}
+@media(prefers-reduced-motion:reduce){.ai-network-diagram{filter:none;}}
+
+/* Final mobile framing: display the entire branching agent diagram above the sticky CTA. */
+@media(max-width:650px){.ai-network-diagram{top:55%;}}
