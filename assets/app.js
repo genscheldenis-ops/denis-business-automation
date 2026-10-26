@@ -7,6 +7,30 @@
   nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); menu?.setAttribute('aria-expanded', 'false'); }));
   document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
 
+
+  // Scroll-tied desktop-to-automation visual, no outside libraries or tracking.
+  const story = document.querySelector('.scroll-story');
+  if (story) {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const navEl = document.querySelector('.nav-wrap');
+    let tick = 0;
+    function renderStory() {
+      tick = 0;
+      if (mq.matches) { story.style.setProperty('--story-progress', '1'); return; }
+      const navHeight = navEl ? Math.round(navEl.getBoundingClientRect().height) : 78;
+      story.style.setProperty('--story-nav-height', navHeight + 'px');
+      const bounds = story.getBoundingClientRect();
+      const travel = Math.max(1, bounds.height - (window.innerHeight - navHeight));
+      const progress = Math.max(0, Math.min(1, -bounds.top / travel));
+      story.style.setProperty('--story-progress', progress.toFixed(4));
+    }
+    function queueStory() { if (!tick) tick = requestAnimationFrame(renderStory); }
+    window.addEventListener('scroll', queueStory, {passive:true});
+    window.addEventListener('resize', queueStory, {passive:true});
+    mq.addEventListener?.('change', queueStory);
+    queueStory();
+  }
+
   // Video only starts on a user's click; the image previews are local.
   const dlg = document.getElementById('videoDialog');
   const mount = document.getElementById('videoMount');
