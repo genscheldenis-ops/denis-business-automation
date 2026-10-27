@@ -694,3 +694,32 @@ body { background: var(--bg); color: var(--ink); }
  .ai-network-diagram {filter:drop-shadow(0 10px 14px rgba(7,60,110,.09));}
 }
 @media(prefers-reduced-motion:reduce){.ai-network-diagram{filter:none;}}
+
+/* V5.2: Approved DG monogram with subtle golden accents replaces the old text icon. */
+.brand .brand-mark {
+  width: 78px;
+  height: 48px;
+  flex: 0 0 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.brand .brand-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
+}
+.brand .brand-name { white-space: nowrap; }
+@media (max-width: 480px) {
+  .brand .brand-mark { width: 60px; height: 40px; flex-basis: 60px; }
+  .brand .brand-mark img { max-height: 40px; }
+  .brand .brand-name { font-size: 13px; }
+  .brand .brand-name small { font-size: 9px; }
+}
