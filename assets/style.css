@@ -638,3 +638,59 @@ body { background: var(--bg); color: var(--ink); }
 
 /* V4.9 mobile: fit all agent connections above sticky mobile CTA. */
 @media(max-width:650px){.ai-network-diagram{width:min(89vw,370px);top:51%;}}
+
+/* V5.0: Only the scroll KI scene: airy, blue gradient matching the user's reference. */
+.story-automation {
+  background-image: url('ki-gradient-blau.webp');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.story-automation::before {
+  background-image:linear-gradient(90deg,rgba(255,255,255,.11) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.11) 1px,transparent 1px);
+  background-size:50px 50px;
+  mask-image:linear-gradient(to bottom,transparent,black 30%,black 78%,transparent);
+  opacity:.42;
+}
+.story-automation::after {background:none;}
+.story-automation-label .story-counter {
+  background:rgba(236,249,255,.86);
+  border:1px solid rgba(10,104,155,.36);
+  color:#09577E;
+  box-shadow:0 8px 23px rgba(23,106,159,.12);
+  backdrop-filter:blur(10px);
+}
+.story-automation-label p {
+  color:#102E4E;
+  font-weight:820;
+  text-shadow:none;
+  letter-spacing:-.053em;
+}
+.story-automation-label p strong {color:#0767A2;}
+.ai-network-diagram {filter:drop-shadow(0 12px 23px rgba(13,76,125,.09));}
+.story-automation-foot {
+  width:max-content;
+  max-width:92%;
+  margin:0 auto;
+  left:0;right:0;
+  color:#FFFFFF;
+  font-weight:770;
+  text-shadow:none;
+  background:rgba(5,56,105,.70);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:16px;
+  backdrop-filter:blur(8px);
+  padding:10px 19px;
+  bottom:26px;
+  box-shadow:0 10px 28px rgba(2,53,108,.14);
+}
+.story-shimmer {background:radial-gradient(circle,rgba(35,150,215,.19),rgba(116,211,235,.11) 48%,transparent 72%);filter:blur(35px);}
+.story-progress {background:rgba(8,96,149,.16);}
+.story-progress span {background:linear-gradient(90deg,#0964A6,#1A94D6,#39C9D8);box-shadow:0 0 9px rgba(36,145,213,.18);}
+@media(max-width:650px){
+ .story-automation::before {background-size:31px 31px;opacity:.30;}
+ .story-automation-label p {color:#0B2D4E;}
+ .story-automation-foot {bottom:9px;max-width:94%;width:auto;font-size:10px;line-height:1.35;padding:7px 10px;background:rgba(6,57,102,.81);color:white;}
+ .ai-network-diagram {filter:drop-shadow(0 10px 14px rgba(7,60,110,.09));}
+}
+@media(prefers-reduced-motion:reduce){.ai-network-diagram{filter:none;}}
