@@ -723,3 +723,41 @@ body { background: var(--bg); color: var(--ink); }
   .brand .brand-name { font-size: 13px; }
   .brand .brand-name small { font-size: 9px; }
 }
+
+
+/* V5.3 — Only the opening "01 / HEUTE" scene:
+   floating overloaded laptop and flying paperwork on cinematic black.
+   Existing scroll-to-AI animation and all subsequent sections remain untouched. */
+.story-desk { background: #020408; }
+.story-desk-picture {
+  background-image: url('story-desk.webp');
+  background-position: 64% 49%;
+  background-size: cover;
+  filter: saturate(1.12) contrast(1.08);
+}
+.story-desk-shade {
+  background:
+    linear-gradient(90deg,rgba(0,2,7,.36) 0%,rgba(0,2,7,.11) 40%,transparent 80%),
+    linear-gradient(0deg,rgba(0,2,7,.36) 0%,transparent 25%);
+}
+.story-desk-panel p { text-shadow: 0 3px 28px rgba(0,0,0,.6); }
+.story-desk-stamp { background: rgba(2,9,16,.78); border-color:rgba(255,255,255,.42); }
+@media(max-width:800px) {
+  .story-desk-picture {background-position: 62% 50%;}
+}
+@media(max-width:560px) {
+  .story-desk-picture {background-position: 63% center;}
+  .story-desk-shade {
+    background:
+      linear-gradient(180deg,rgba(0,2,7,.77) 0%,rgba(0,2,7,.50) 30%,rgba(0,2,7,.05) 62%,rgba(0,2,7,.36) 100%);
+  }
+}
+
+@media(max-width:560px) {
+  .story-desk-panel {
+    padding: 14px 16px 16px;
+    margin-left: -7px;
+    background: linear-gradient(105deg,rgba(0,0,0,.80),rgba(0,0,0,.48) 78%,transparent);
+    border-radius: 16px;
+  }
+}
