@@ -585,3 +585,56 @@ body { background: var(--bg); color: var(--ink); }
     .example-notice { padding: 14px 16px; margin-bottom: 18px; font-size: 14px; }
     .example-notice strong { font-size: 16px; }
 }
+
+/* V4.9 — VIVID AI NETWORK: modern, high-contrast showcase, scoped to scroll scene */
+.story-automation {
+  background:
+    radial-gradient(ellipse 46% 52% at 52% 69%, rgba(5,166,207,.18) 0, transparent 78%),
+    radial-gradient(ellipse 40% 40% at 80% 47%, rgba(109,62,213,.18) 0, transparent 78%),
+    radial-gradient(ellipse 35% 33% at 12% 50%, rgba(0,94,205,.18) 0, transparent 79%),
+    linear-gradient(125deg, #07121F 0%, #0B2033 54%, #10172B 100%);
+}
+.story-automation::before {
+  background-image:
+    linear-gradient(rgba(73,172,205,.095) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(73,172,205,.095) 1px,transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  opacity:.52;
+}
+.story-automation::after {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 54% 68%,transparent 16%,rgba(3,12,25,.2) 92%);
+}
+.story-automation-label { z-index:7; }
+.story-automation-label .story-counter {
+ background:rgba(14,77,104,.72);
+ border:1px solid #36C6F0;
+ color:#A8F2FF;
+ box-shadow:0 0 25px rgba(27,197,235,.17);
+ letter-spacing:.16em;
+}
+.story-automation-label p {
+ color:#F4FAFF;
+ text-shadow:0 6px 26px rgba(0,0,0,.22);
+ font-weight:780;
+ letter-spacing:-.052em;
+}
+.story-automation-label p strong {color:#54E4FD;}
+.ai-network-diagram {filter:drop-shadow(0 16px 25px rgba(1,8,20,.25));}
+.story-automation-foot {color:#D8F3FF;font-weight:710;text-shadow:0 2px 10px rgba(0,0,0,.24);}
+.story-shimmer {
+ background:radial-gradient(circle,rgba(11,198,232,.28),rgba(112,67,234,.13) 43%,transparent 71%);
+ filter:blur(32px);
+}
+.story-progress {background:rgba(160,207,231,.17);}
+.story-progress span {background:linear-gradient(90deg,#247BFF,#22DBF3,#A276FF);box-shadow:0 0 12px rgba(34,219,243,.5);}
+@media(max-width:650px){
+ .story-automation::before{background-size:34px 34px;}
+ .story-automation-foot{color:#D8F3FF;font-weight:700;}
+ .ai-network-diagram{filter:drop-shadow(0 10px 16px rgba(0,5,14,.2));}
+}
+@media(prefers-reduced-motion:reduce){.ai-network-diagram{filter:none;}}
+
+/* V4.9 mobile: fit all agent connections above sticky mobile CTA. */
+@media(max-width:650px){.ai-network-diagram{width:min(89vw,370px);top:51%;}}
