@@ -1,0 +1,57 @@
+/* V6.4: one complete new illustration per screen format.
+   A new class keeps every historical .story-automation / .reference-* rule
+   out of this scene. No canvas, SVG, side panels or legacy pseudo-elements. */
+.scroll-story .ki-workflow-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  isolation: isolate;
+  opacity: clamp(0, calc((var(--p) - .21) * 2.8), 1);
+  background: #06164f;
+}
+.scroll-story .ki-workflow-picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.scroll-story .ki-workflow-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 900px) and (orientation: portrait) {
+  .scroll-story .ki-workflow-image { object-position: center 65%; }
+}
+/* Keep the complete portrait on larger phones, including badge and caption. */
+@media (min-width: 391px) and (max-width: 650px) and (orientation: portrait) {
+  .scroll-story .story-sticky { height: calc(100vw * 4 / 3) !important; }
+}
+/* The old minimum of 530px exceeds short landscape viewports. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .scroll-story .story-sticky {
+    height: calc(100svh - var(--story-nav-height)) !important;
+    min-height: 0 !important;
+  }
+}
+/* Tablets reserve room for the site's existing fixed contact button.
+   The portrait artwork remains complete; only its empty outer edge blends. */
+@media (min-width: 651px) and (max-width: 900px) and (orientation: portrait) {
+  .scroll-story .ki-workflow-scene {
+    bottom: 70px;
+    background: linear-gradient(180deg, #c2f7ff 0%, #1079dc 10%, #06347e 25%, #071b58 64%, #06164f 100%);
+  }
+  .scroll-story .ki-workflow-picture { display: flex; justify-content: center; }
+  .scroll-story .ki-workflow-image {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-story .ki-workflow-scene { opacity: 1; }
+}
