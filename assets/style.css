@@ -816,3 +816,61 @@ body { background: var(--bg); color: var(--ink); }
 @media(prefers-reduced-motion:reduce){
   .scroll-story .ki-pulse-track{animation:none;stroke-dasharray:2 98;stroke-dashoffset:0;opacity:.45;}
 }
+
+/* VERSION 5.6 - warm full-width header, approved network, independently animated chromatic waves. */
+@media(min-width:651px){
+  .scroll-story .story-automation{
+    background-image:url('ki-netzwerk-gelb-blau.webp');
+    background-size:100% 100%; background-repeat:no-repeat; background-position:center;
+  }
+  .scroll-story .story-automation-label {visibility:visible; opacity:clamp(0,calc((var(--p) - .39)*5.5),1);z-index:9;}
+  .scroll-story .story-automation-label .story-counter{
+    background:rgba(255,252,233,.76);border:1px solid #E2C06D;color:#0B578D;
+    box-shadow:0 4px 21px rgba(31,113,196,.09);backdrop-filter:blur(8px);
+  }
+  .scroll-story .story-automation-label p,
+  .scroll-story .story-automation-label p strong{color:#0D3159;text-shadow:none;}
+  .scroll-story .story-automation-label p strong{color:#0878C4;}
+  .scroll-story .story-automation-foot{
+    visibility:visible;color:#F5FBFF;background:rgba(4,24,87,.80);
+    border:1px solid rgba(105,215,255,.68);backdrop-filter:blur(9px);
+    z-index:10;bottom:35px;box-shadow:0 9px 26px rgba(1,18,81,.24);
+  }
+  /* Existing moving arrow pulses stay intact; align with lowered graphic crop. */
+  .scroll-story .ki-flow-motion{transform:translateY(4.7%);}
+  .scroll-story .ki-pulse-track{stroke:#C4FCFF;stroke-width:5.4;}
+}
+/* Animated wave is NOT a fixed picture: SVG wave geometry, glowing crests and particle strands drift continuously.
+   SVG gradient stop-color loops Blue->Violet->Yellow->Blue with different phases. */
+.scroll-story .ki-animated-waves{
+  position:absolute;z-index:5;pointer-events:none;left:-3%;bottom:0;width:106%;height:31%;
+  overflow:hidden;opacity:.99;filter:drop-shadow(0 -5px 10px rgba(44,147,245,.16));
+}
+.scroll-story .ki-animated-waves img{display:block;width:100%;height:100%;object-fit:fill;}
+@media(max-width:650px){
+  .scroll-story .story-automation{
+    background:linear-gradient(180deg,#FFFDF0 0%,#FFF6D5 14%,#EDF7F6 24%,#6EC5F0 35%,#126BDA 49%,#06338F 67%,#080D4C 100%)!important;
+  }
+  .scroll-story .story-automation::after{content:none!important;display:none!important;}
+  .scroll-story .story-automation-label .story-counter{background:rgba(255,250,226,.91);border:1px solid #D2B66B;color:#0B5684;text-shadow:none;}
+  .scroll-story .story-automation-label p,
+  .scroll-story .story-automation-label p strong{color:#0B3155;text-shadow:none;}
+  .scroll-story .story-automation-label p strong{color:#0A72B8;}
+  .scroll-story .ai-network-diagram{top:55%;z-index:7;}
+  .scroll-story .ki-animated-waves{height:29%;bottom:0;left:-10%;width:120%;z-index:2;opacity:.93;}
+  .scroll-story .story-automation-foot{z-index:9;bottom:10px;max-width:95%;}
+}
+@media(prefers-reduced-motion:reduce){
+  .scroll-story .ki-animated-waves img{animation:none!important;}
+  .scroll-story .ki-pulse-track{animation:none!important;}
+}
+
+/* V5.6 final polish: preserve two-line editorial headline on desktop. */
+@media(min-width:651px){
+  .scroll-story .story-automation-label{max-width:min(860px,82vw);}
+  .scroll-story .story-automation-label p{font-size:clamp(35px,3.45vw,55px);}
+}
+@media(max-width:650px){
+  .scroll-story .ki-animated-waves{height:40%;}
+  .scroll-story .story-automation-foot{bottom:28px;}
+}
