@@ -874,3 +874,139 @@ body { background: var(--bg); color: var(--ink); }
   .scroll-story .ki-animated-waves{height:40%;}
   .scroll-story .story-automation-foot{bottom:28px;}
 }
+
+/* ============================================================
+   VERSION 5.7 — exact original KI artwork + real moving waves,
+   warm full-width top fade, visible moving arrowheads (not dots).
+   Everything is scoped to the second scroll scene.
+   ============================================================ */
+.scroll-story .story-automation {
+  background:linear-gradient(to bottom,
+    #FFFDF4 0%,#FFF7DF 11%,#F9FAF6 19%,
+    #DBF4FC 26%,#64BBF7 36%,#0960C5 49%,
+    #052F8F 64%,#061A5F 79%,#041141 100%) !important;
+  overflow:hidden;
+}
+.scroll-story .story-automation::before,
+.scroll-story .story-automation::after{content:none!important;display:none!important;}
+/* Ref photo, un-stretched. Larger in desktop to mirror the original image crop. */
+.scroll-story .ki-approved-reference {
+ position:absolute;z-index:6;
+ width:min(100vw,1536px);max-width:100%;
+ top:35%;left:50%;transform:translateX(-50%);
+ aspect-ratio:1536/446; pointer-events:none;
+ filter:drop-shadow(0 10px 12px rgba(6,22,104,.11));
+}
+.scroll-story .ki-approved-reference>img{display:block;width:100%;height:100%;object-fit:contain;}
+.scroll-story .ki-moving-arrows {
+ position:absolute;inset:0;width:100%;height:100%;overflow:visible;
+ filter:drop-shadow(0 0 5px #38DDFD);
+}
+.scroll-story .ai-network-diagram{display:none!important;}
+.scroll-story .ki-flow-motion{display:none!important;}
+.scroll-story .ki-animated-waves{display:none!important;}
+/* Exact wave art from the original; natural movement across the screen. */
+.scroll-story .ki-reference-waves{
+ position:absolute;z-index:4;left:-2%;bottom:-1%;height:38%;width:104%;
+ pointer-events:none;overflow:hidden;
+ -webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 17%,black 92%);
+ mask-image:linear-gradient(to bottom,transparent 0%,black 17%,black 92%);
+}
+.scroll-story .ki-wave-layer{
+ width:100%;height:100%;object-fit:cover;object-position:center bottom;
+ position:absolute;inset:0;display:block;
+ mix-blend-mode:screen;will-change:transform,filter;
+}
+.scroll-story .ki-wave-base{
+ opacity:.95;animation:kiWaveDriftPrimary 10s ease-in-out infinite alternate;
+}
+.scroll-story .ki-wave-secondary{
+ opacity:.40;animation:kiWaveDriftSecondary 13s ease-in-out infinite alternate,kiWaveHue 16s ease-in-out infinite;
+}
+.scroll-story .ki-wave-chromatic {
+ position:absolute;inset:0;opacity:.84;
+ background:linear-gradient(105deg,#087AFB 0%,#8150FD 26%,#F8D05A 51%,#4CCBFF 74%,#D45BFE 100%);
+ background-size:260% 170%;
+ -webkit-mask-image:url('ki-wellen-leuchtmaske.png');
+ mask-image:url('ki-wellen-leuchtmaske.png');
+ -webkit-mask-size:100% 100%;mask-size:100% 100%;
+ mix-blend-mode:screen;
+ animation:kiWaveColorCycle 13.5s linear infinite,kiWaveDriftPrimary 10s ease-in-out infinite alternate;
+}
+@keyframes kiWaveDriftPrimary{0%{transform:translate3d(-1.6%,2%,0) scale(1.05,1.03)}50%{transform:translate3d(.6%,-1.5%,0) scale(1.025,1.045)}100%{transform:translate3d(1.8%,1.8%,0) scale(1.05,1.03)}}
+@keyframes kiWaveDriftSecondary{0%{transform:translate3d(2.1%,1.9%,0) scale(1.06,1.04)}50%{transform:translate3d(-1.3%,-2%,0) scale(1.03,1.07)}100%{transform:translate3d(-2.1%,.7%,0) scale(1.04,1.04)}}
+@keyframes kiWaveHue{0%,100%{filter:hue-rotate(0deg) saturate(1.08)}40%{filter:hue-rotate(80deg) saturate(1.25)}75%{filter:hue-rotate(-120deg) saturate(1.45)}}
+@keyframes kiWaveColorCycle{0%{background-position:0% 60%;filter:hue-rotate(0deg)}35%{background-position:48% 40%;filter:hue-rotate(55deg)}68%{background-position:100% 60%;filter:hue-rotate(-90deg)}100%{background-position:0% 60%;filter:hue-rotate(0deg)}}
+.scroll-story .story-automation-label{visibility:visible!important;z-index:10;top:clamp(35px,5.4vh,73px);opacity:clamp(0,calc((var(--p) - .39)*5.5),1);}
+.scroll-story .story-automation-label .story-counter{
+ background:rgba(255,255,255,.90)!important;color:#0C568B!important;
+ border:1px solid #4EA6D9!important;text-shadow:none;box-shadow:0 3px 15px rgba(10,93,154,.10);
+}
+.scroll-story .story-automation-label p,
+.scroll-story .story-automation-label p strong{color:#102D5C!important;text-shadow:none!important;}
+.scroll-story .story-automation-label p strong{color:#0669B3!important;}
+.scroll-story .story-automation-foot{
+ z-index:12;visibility:visible;bottom:20px!important;
+ color:#FFF!important;background:rgba(3,24,79,.78)!important;
+ border:1px solid rgba(94,182,250,.6)!important;
+ max-width:92%;padding:12px 21px;
+}
+@media(max-width:650px){
+ .scroll-story .story-automation {
+  background:linear-gradient(to bottom,#FFFDF3,#FFF8E6 13%,#D7F1FE 25%,#2586EA 39%,#082C85 56%,#04164C 100%)!important;
+ }
+ .scroll-story .story-automation-label{top:18px;z-index:10;}
+ .scroll-story .story-automation-label p{font-size:clamp(26px,6.6vw,34px)!important;}
+ /* Full desktop screenshot would be illegible on a narrow phone: preserve mobile agent diagram. */
+ .scroll-story .ki-approved-reference{display:none!important;}
+ .scroll-story .ai-network-diagram{display:block!important;z-index:7;top:51%;width:min(96vw,440px);}
+ .scroll-story .ki-reference-waves{bottom:-1%;width:150%;left:-25%;height:30%;}
+ .scroll-story .ki-wave-chromatic{-webkit-mask-size:100% 100%;mask-size:100% 100%;}
+ .scroll-story .story-automation-foot{bottom:11px!important;font-size:10px;line-height:1.4;padding:7px 12px;}
+}
+@media(prefers-reduced-motion:reduce){
+ .scroll-story .ki-wave-layer,.scroll-story .ki-wave-chromatic{animation:none!important;}
+ .scroll-story .ki-moving-arrows animateTransform{display:none;}
+}
+
+/* V5.7 visual QA fixes: fade the illustration into the gradient, keep captions clear. */
+.scroll-story .story-automation{
+ background:linear-gradient(to bottom,#FFFDF3 0%,#FFF8E5 13%,#FAFAF6 17%,#B7E8FF 23%,#3888DE 30%,#0C52B0 38%,#092D80 49%,#062268 67%,#041444 100%)!important;
+}
+.scroll-story .ki-approved-reference{
+ -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.75) 4%,black 9%,black 88%,transparent 100%);
+ mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.75) 4%,black 9%,black 88%,transparent 100%);
+}
+.scroll-story .ki-reference-waves{height:31%;bottom:0;}
+.scroll-story .story-automation-foot{bottom:13px!important;}
+@media(max-width:650px){
+ .scroll-story .ai-network-diagram{width:min(85vw,350px);top:46%;}
+ .scroll-story .ki-reference-waves{height:28%;bottom:0;}
+ .scroll-story .story-automation-foot{bottom:7px!important;font-size:10px;}
+}
+/* Chromium/Safari-safe fades: do not mask whole composites, which can hide layers on some GPUs. */
+.scroll-story .ki-approved-reference{-webkit-mask-image:none!important;mask-image:none!important;}
+.scroll-story .ki-approved-reference::after{
+ content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+ background:linear-gradient(to bottom,rgba(17,83,174,1) 0%,rgba(17,83,174,.75) 2.5%,transparent 9%,transparent 88%,rgba(4,23,73,.88) 100%);
+}
+.scroll-story .ki-reference-waves{-webkit-mask-image:none!important;mask-image:none!important;}
+/* Experimental compositing blend to remove dark photo rectangle seam */
+.scroll-story .ki-approved-reference{mix-blend-mode:screen;}
+/* Try direct-image edge feathering, avoiding masked svg arrowheads */
+.scroll-story .ki-approved-reference{mix-blend-mode:normal;}
+.scroll-story .ki-approved-reference::after{display:none;}
+.scroll-story .ki-approved-reference>img{-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 91%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 91%,transparent 100%);}
+
+/* Edge-free composite: source artwork kept exactly; only its original plain background is transparent. */
+.scroll-story .ki-approved-reference>img{-webkit-mask-image:none!important;mask-image:none!important;}
+.scroll-story .ki-approved-reference::after{display:none!important;}
+.scroll-story .ki-approved-reference {mix-blend-mode:normal!important;}
+.scroll-story .ki-wave-layer{mix-blend-mode:normal;}
+
+/* Wave glow is real transparent reference imagery. Hue-shift the pixels, not a solid overlay. */
+.scroll-story .ki-wave-chromatic{display:none!important;}
+.scroll-story .ki-reference-waves{height:27%;}
+.scroll-story .ki-wave-layer{mix-blend-mode:screen;opacity:.88;}
+.scroll-story .ki-wave-secondary{opacity:.78;animation:kiWaveDriftSecondary 11s ease-in-out infinite alternate,kiWaveHue 13s ease-in-out infinite;}
+@media(max-width:650px){.scroll-story .ki-reference-waves{height:27%;}}
