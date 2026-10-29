@@ -1010,3 +1010,155 @@ body { background: var(--bg); color: var(--ink); }
 .scroll-story .ki-wave-layer{mix-blend-mode:screen;opacity:.88;}
 .scroll-story .ki-wave-secondary{opacity:.78;animation:kiWaveDriftSecondary 11s ease-in-out infinite alternate,kiWaveHue 13s ease-in-out infinite;}
 @media(max-width:650px){.scroll-story .ki-reference-waves{height:27%;}}
+
+/* ============================================================
+   VERSION 5.9 — exact-source wave and compact network animation.
+   All changes deliberately scoped to the KI scene only.
+   ============================================================ */
+.scroll-story .story-automation{
+  /* Whole-width even warm white/cyan upper glow, then increasingly deep
+     saturated royal blue; no upper-right bright spot and no hard bands. */
+  background:
+    linear-gradient(to bottom,
+       #FFFCF0 0%, #FFF9E9 8%, #F4FAFB 14%,
+       #D6F5FF 19%, #79D6FD 25%,
+       #238CE9 34%, #0866D0 43%,
+       #0844AE 52%, #052F88 65%,
+       #04175E 82%, #020C3F 100%) !important;
+}
+.scroll-story .story-automation::before,
+.scroll-story .story-automation::after{display:none!important;content:none!important;}
+.scroll-story .story-automation-label{top:clamp(30px,5vh,64px);}
+.scroll-story .story-automation-label .story-counter{
+  background:rgba(255,255,255,.83)!important;
+  border:1px solid rgba(35,146,205,.56)!important;
+  color:#084B7D!important;
+}
+.scroll-story .story-automation-label p {color:#0D2D58!important;}
+.scroll-story .story-automation-label p strong {color:#0967B7!important;}
+.scroll-story .ki-approved-reference{
+  top:28%!important;
+  width:min(100vw,1536px);
+  aspect-ratio:1536 / 446;
+  z-index:7;
+  filter:none;
+}
+.scroll-story .ki-approved-reference>img{
+  object-fit:contain;
+  width:100%;height:100%;
+}
+.scroll-story .ki-moving-arrows{display:none!important;}
+.scroll-story .ki-connector-animation{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  overflow:visible;
+  filter:drop-shadow(0 0 3px rgba(83,226,255,.5));
+}
+.scroll-story .ki-dashed-line{
+  stroke-width:3.5;
+  fill:none;
+  stroke-linejoin:round;
+  stroke-linecap:round;
+  stroke-dasharray:5.5 10.5;
+  animation:kiDashForward var(--dur,2.5s) linear infinite;
+  animation-delay:var(--delay,0s);
+}
+@keyframes kiDashForward {from{stroke-dashoffset:0;}to{stroke-dashoffset:-128;}}
+/* Exact raster wave image from the reference, repeated in a continuous
+   rightward horizontal cycle. Each track travels on the X-axis ONLY. */
+.scroll-story .ki-reference-waves{
+  position:absolute;
+  z-index:5;
+  bottom:0!important;
+  height:23%!important;
+  left:0!important;
+  width:100%!important;
+  overflow:hidden;
+  mask-image:linear-gradient(to bottom,transparent 0%,black 15%,black 100%)!important;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 15%,black 100%)!important;
+  pointer-events:none;
+  background:none;
+}
+.scroll-story .ki-wave-track{
+  position:absolute;
+  left:-100%; top:0;
+  height:100%;width:200%;
+  display:flex;align-items:stretch;
+  will-change:transform;
+  animation:kiWaveMoveRight 30s linear infinite;
+}
+.scroll-story .ki-wave-copy{
+  width:50%;flex:0 0 50%;height:100%;object-fit:fill;
+  display:block;
+}
+.scroll-story .ki-wave-base{opacity:.98;}
+.scroll-story .ki-wave-highlight{
+  opacity:.47;
+  filter:hue-rotate(61deg) saturate(1.65);
+  animation-duration:41s;animation-delay:-17s;
+  mix-blend-mode:screen;
+}
+.scroll-story .ki-wave-yellow{
+  opacity:.49;
+  filter:hue-rotate(174deg) saturate(1.55) brightness(1.12);
+  mix-blend-mode:screen;
+  animation:kiWaveMoveRight 35s linear infinite,kiWaveYellowGlow 15s ease-in-out infinite;
+  animation-delay:-12s,0s;
+}
+@keyframes kiWaveMoveRight{from{transform:translateX(0);}to{transform:translateX(50%);}}
+@keyframes kiWaveYellowGlow{
+  0%,100%{opacity:.16;filter:hue-rotate(172deg) saturate(1.4);}
+  35%{opacity:.67;filter:hue-rotate(213deg) saturate(1.75);}
+  70%{opacity:.45;filter:hue-rotate(140deg) saturate(1.8);}
+}
+.scroll-story .ki-wave-layer,
+.scroll-story .ki-wave-chromatic{display:none!important;}
+.scroll-story .story-automation-foot{
+  bottom:13px!important;
+  z-index:10;
+  font-size:clamp(12px,1.15vw,15px);
+  background:rgba(2,20,65,.77)!important;
+}
+@media(max-width:650px){
+ .scroll-story .story-automation{
+   background:linear-gradient(to bottom,#FFFCF1 0%,#FFF8E7 10%,#DDF7FF 20%,#58BBF6 32%,#0966CE 48%,#063B98 63%,#041455 100%)!important;
+ }
+ .scroll-story .ki-approved-reference{display:none!important;}
+ .scroll-story .ai-network-diagram{display:block!important;top:45%;width:min(85vw,350px);}
+ .scroll-story .ki-reference-waves{height:19%!important;}
+ .scroll-story .story-automation-label{top:18px;}
+ .scroll-story .story-automation-foot{bottom:6px!important;max-width:95%;font-size:10px;}
+}
+@media(prefers-reduced-motion:reduce){
+ .scroll-story .ki-dashed-line,.scroll-story .ki-wave-track{animation:none!important;}
+}
+
+/* V5.9 final tuning: dark blue under the original network, bright across full top. */
+.scroll-story .story-automation{
+ background:linear-gradient(to bottom,
+  #FFFCF0 0%,#FEFFFF 8%,#D6F4FF 14%,
+  #79D2F9 20%,#237FD7 27%,#084BB3 32%,
+  #092F8B 39%,#071C62 47%,#071855 62%,
+  #07134D 78%,#030B36 100%)!important;
+}
+.scroll-story .ki-wave-track{left:0!important;width:400%!important;animation-name:kiWaveMoveRightSeamless!important;animation-duration:48s!important;}
+.scroll-story .ki-wave-track img{width:50%;flex:0 0 50%;object-fit:fill;}
+.scroll-story .ki-wave-highlight{display:none!important;}
+.scroll-story .ki-wave-yellow{
+ opacity:.3;
+ filter:sepia(.88) saturate(3) hue-rotate(344deg) brightness(1.15);
+ animation:kiWaveMoveRightSeamless 60s linear infinite,kiWaveGoldenTint 16s ease-in-out infinite!important;
+}
+@keyframes kiWaveMoveRightSeamless{from{transform:translateX(-50%);}to{transform:translateX(0%);}}
+@keyframes kiWaveGoldenTint{0%,100%{opacity:.12}50%{opacity:.40}}
+@media(max-width:650px){
+ .scroll-story .story-automation{
+  background:linear-gradient(to bottom,#FFFCF0 0%,#FCFEFF 10%,#B5EAFF 19%,#51A8F1 27%,#0759BF 41%,#072973 54%,#061758 74%,#020C39 100%)!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){.scroll-story .ki-wave-track{animation:none!important;}}
+
+/* Finish: softly illuminate the original dashed linework (not duplicate strokes). */
+.scroll-story .ki-dashed-line{stroke-width:2.2;opacity:.58;}
+.scroll-story .ki-connector-animation{filter:drop-shadow(0 0 2px rgba(83,226,255,.23));}
