@@ -1332,3 +1332,53 @@ body { background: var(--bg); color: var(--ink); }
   from{background-position-x:-7px;}
   to{background-position-x:0px;}
 }
+
+
+/* V6.2 — ONE continuous horizontally animated wave over the entire KI section. */
+.scroll-story .reference-viewport {
+ position:absolute; inset:0; isolation:isolate;
+ background:#07154B url('ki-background-full.webp') center / 100% 100% no-repeat!important;
+ overflow:hidden;
+}
+.scroll-story .reference-viewport::before,
+.scroll-story .reference-viewport::after {content:none!important;display:none!important;}
+.scroll-story .reference-side {display:none!important;}
+.scroll-story .reference-art {
+ z-index:2; position:relative; flex:none;
+ background:transparent!important;
+ height:100%;max-height:calc(100vw * 1024 / 1536);
+ max-width:100%;width:auto;aspect-ratio:1536/1024;
+ overflow:visible;
+}
+.scroll-story .reference-image{width:100%;height:100%;object-fit:fill;}
+.scroll-story .reference-dashed-network{z-index:4;}
+.scroll-story .reference-wave-motion,
+.scroll-story .reference-wave-gold {display:none!important;}
+.scroll-story .ki-fullwidth-wave {
+ z-index:3; position:absolute;
+ width:100%;height:35%;bottom:0;left:0;
+ display:block;pointer-events:none;
+ filter:drop-shadow(0 0 9px rgba(38,170,255,.16));
+}
+.scroll-story .ki-reference-caption {
+ z-index:6;position:absolute;bottom:5.3%;left:50%;transform:translateX(-50%);
+ max-width:calc(100% - 24px);width:max-content;
+ font:700 clamp(11px,1.25vw,17px)/1.35 system-ui,-apple-system,Arial,sans-serif;
+ color:white;text-align:center;white-space:normal;
+ border:1px solid rgba(64,151,255,.75);background:rgba(7,27,80,.70);
+ text-shadow:0 1px 4px rgba(0,8,37,.8);
+ padding:9px 17px;border-radius:12px;
+ box-shadow:0 0 18px rgba(14,110,228,.13);
+}
+@media (max-width:650px){
+ .scroll-story .reference-art{width:100%!important;height:auto!important;max-height:none;}
+ .scroll-story .ki-fullwidth-wave{height:29%;}
+ .scroll-story .ki-reference-caption{bottom:3.5%;font-size:9px;padding:6px 10px;max-width:96%;}
+}
+@media(prefers-reduced-motion:reduce) { .scroll-story .ki-fullwidth-wave {filter:none;} }
+
+/* V6.2 final mobile composition: eliminate excessive space above the agent chain. */
+@media(max-width:650px){
+ .scroll-story .reference-art{transform:translateY(-52px)!important;}
+ .scroll-story .ki-fullwidth-wave{height:31%!important;}
+}
