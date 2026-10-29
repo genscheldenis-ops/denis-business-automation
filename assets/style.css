@@ -761,3 +761,58 @@ body { background: var(--bg); color: var(--ink); }
     border-radius: 16px;
   }
 }
+
+
+/* V5.4: Approved AI artwork; animated arrows remain live SVG, scroll transition unchanged. */
+@media(min-width:651px){
+  .scroll-story .story-automation {
+    background-image:url('ki-netzwerk-neu.webp');
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    background-position:center;
+  }
+  .scroll-story .story-automation::before,
+  .scroll-story .story-automation::after {content:none;}
+  .scroll-story .story-automation-label,
+  .scroll-story .story-automation-foot,
+  .scroll-story .ai-network-diagram {visibility:hidden;}
+  .scroll-story .ki-flow-motion {
+    display:block; position:absolute; inset:0; z-index:7;
+    width:100%;height:100%; overflow:visible; pointer-events:none;
+  }
+  .scroll-story .ki-pulse-track {
+    stroke:#A8F9FF;
+    stroke-width:5;
+    stroke-linecap:round;
+    stroke-dasharray:2 98;
+    fill:none;
+    filter:url(#flow-light);
+    animation:ki-flow-shimmer 2.9s linear infinite;
+    animation-delay:var(--phase,0s);
+  }
+  @keyframes ki-flow-shimmer{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+}
+@media(max-width:650px){
+  .scroll-story .story-automation {
+    background:linear-gradient(160deg,#071C65 3%,#03328D 51%,#032267 100%)!important;
+  }
+  .scroll-story .story-automation::before {content:none;}
+  .scroll-story .story-automation::after {
+    content:"";display:block;position:absolute;z-index:1;
+    left:0;right:0;top:auto;bottom:0;height:33%;pointer-events:none;
+    background:url('ki-netzwerk-wellen.webp') center bottom / 100% 100% no-repeat;
+    opacity:.92;
+  }
+  .scroll-story .story-automation-label .story-counter {
+    color:#ECFAFF;background:rgba(2,26,78,.7);border-color:#44E6FF;
+  }
+  .scroll-story .story-automation-label p,
+  .scroll-story .story-automation-label p strong {color:#FFFFFF;text-shadow:0 2px 16px #00143B;}
+  .scroll-story .story-automation-label p strong {color:#55E8FF;}
+  .scroll-story .ai-network-diagram {filter:drop-shadow(0 0 15px rgba(17,207,255,.2));z-index:4;}
+  .scroll-story .story-automation-foot {z-index:5;}
+  .scroll-story .ki-flow-motion {display:none;}
+}
+@media(prefers-reduced-motion:reduce){
+  .scroll-story .ki-pulse-track{animation:none;stroke-dasharray:2 98;stroke-dashoffset:0;opacity:.45;}
+}
