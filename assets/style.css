@@ -641,7 +641,7 @@ body { background: var(--bg); color: var(--ink); }
 
 /* V5.0: Only the scroll KI scene: airy, blue gradient matching the user's reference. */
 .story-automation {
-  background-image: url('ki-gradient-blau.webp');
+  background-image: none;
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -766,7 +766,7 @@ body { background: var(--bg); color: var(--ink); }
 /* V5.4: Approved AI artwork; animated arrows remain live SVG, scroll transition unchanged. */
 @media(min-width:651px){
   .scroll-story .story-automation {
-    background-image:url('ki-netzwerk-neu.webp');
+    background-image:none;
     background-size:100% 100%;
     background-repeat:no-repeat;
     background-position:center;
@@ -800,7 +800,7 @@ body { background: var(--bg); color: var(--ink); }
   .scroll-story .story-automation::after {
     content:"";display:block;position:absolute;z-index:1;
     left:0;right:0;top:auto;bottom:0;height:33%;pointer-events:none;
-    background:url('ki-netzwerk-wellen.webp') center bottom / 100% 100% no-repeat;
+    background:none center bottom / 100% 100% no-repeat;
     opacity:.92;
   }
   .scroll-story .story-automation-label .story-counter {
@@ -820,7 +820,7 @@ body { background: var(--bg); color: var(--ink); }
 /* VERSION 5.6 - warm full-width header, approved network, independently animated chromatic waves. */
 @media(min-width:651px){
   .scroll-story .story-automation{
-    background-image:url('ki-netzwerk-gelb-blau.webp');
+    background-image:none;
     background-size:100% 100%; background-repeat:no-repeat; background-position:center;
   }
   .scroll-story .story-automation-label {visibility:visible; opacity:clamp(0,calc((var(--p) - .39)*5.5),1);z-index:9;}
@@ -927,8 +927,8 @@ body { background: var(--bg); color: var(--ink); }
  position:absolute;inset:0;opacity:.84;
  background:linear-gradient(105deg,#087AFB 0%,#8150FD 26%,#F8D05A 51%,#4CCBFF 74%,#D45BFE 100%);
  background-size:260% 170%;
- -webkit-mask-image:url('ki-wellen-leuchtmaske.png');
- mask-image:url('ki-wellen-leuchtmaske.png');
+ -webkit-mask-image:none;
+ mask-image:none;
  -webkit-mask-size:100% 100%;mask-size:100% 100%;
  mix-blend-mode:screen;
  animation:kiWaveColorCycle 13.5s linear infinite,kiWaveDriftPrimary 10s ease-in-out infinite alternate;
@@ -1162,3 +1162,80 @@ body { background: var(--bg); color: var(--ink); }
 /* Finish: softly illuminate the original dashed linework (not duplicate strokes). */
 .scroll-story .ki-dashed-line{stroke-width:2.2;opacity:.58;}
 .scroll-story .ki-connector-animation{filter:drop-shadow(0 0 2px rgba(83,226,255,.23));}
+
+/* VERSION 6.0 — exact approved reference, no reconstructed network or wave artwork. */
+.scroll-story .story-automation {
+ background: #06134B!important;
+ opacity:clamp(0,calc((var(--p) - .21)*2.8),1);
+ transform:none!important;
+ overflow:hidden;
+}
+.scroll-story .story-automation::before,
+.scroll-story .story-automation::after {content:none!important;display:none!important;}
+.scroll-story .reference-viewport {
+ position:absolute;inset:0;overflow:hidden;
+ display:flex;align-items:center;justify-content:center;
+ background: radial-gradient(ellipse at center,#1239A4 0%,#081E64 70%,#04103C 100%);
+}
+.scroll-story .reference-viewport::before {
+ content:"";position:absolute;inset:-5%;z-index:0;pointer-events:none;
+ background:url('ki-reference-clean.webp') center/cover no-repeat;
+ filter:blur(38px) brightness(.64) saturate(1.1);
+ opacity:.82;transform:scale(1.09);
+}
+.scroll-story .reference-art {
+ position:relative;z-index:1;
+ height:100%;max-height:calc(100vw * 1024 / 1536);
+ max-width:100%;width:auto;aspect-ratio:1536/1024;
+ flex:none;
+ overflow:hidden;
+ background:#07184D;
+}
+.scroll-story .reference-image,
+.scroll-story .reference-wave-motion,
+.scroll-story .reference-wave-gold,
+.scroll-story .reference-dashed-network {
+ display:block;position:absolute;inset:0;width:100%;height:100%;
+}
+.scroll-story .reference-image {object-fit:fill;}
+.scroll-story .reference-wave-motion {pointer-events:none;z-index:2;
+ -webkit-mask-image:linear-gradient(to bottom,transparent 63%,black 71%,black 85%,transparent 90%);
+ mask-image:linear-gradient(to bottom,transparent 63%,black 71%,black 85%,transparent 90%);
+}
+.scroll-story .reference-wave-gold {z-index:3;pointer-events:none;
+ opacity:0;mix-blend-mode:screen;
+ animation:referenceGoldCycle 16s ease-in-out infinite;
+}
+@keyframes referenceGoldCycle {0%,100%{opacity:0}30%{opacity:.18}63%{opacity:.40}82%{opacity:.14}}
+.scroll-story .reference-dashed-network {z-index:4;overflow:visible;pointer-events:none;}
+.scroll-story .reference-dash {
+ fill:none;stroke-width:3.15;stroke-linecap:round;stroke-linejoin:round;
+ stroke-dasharray:5.5 10.5;
+ filter:url(#light-dash-glow);
+ animation:referenceDashRight 1.8s linear infinite;
+ animation-delay:var(--offset,0s);
+}
+/* Negative offset advances the dash pattern along each left-to-right path.
+   No additional dots or traveling arrowheads exist. */
+@keyframes referenceDashRight {from{stroke-dashoffset:0}to{stroke-dashoffset:-64}}
+@media(max-width:650px){
+ .scroll-story .reference-viewport{background:#06134B;}
+ .scroll-story .reference-art{width:100%;height:auto;max-height:none;max-width:100%;}
+ .scroll-story .reference-viewport::before{filter:blur(18px) brightness(.65);}
+}
+@media(prefers-reduced-motion:reduce){
+ .scroll-story .reference-dash,.scroll-story .reference-wave-gold{animation:none!important;}
+ .scroll-story .reference-wave-motion{display:none!important;}
+}
+
+/* V6.0 QA: animated pixel deformation confined to the actual wave area;
+   agent labels and bottom caption remain pixel-perfect and stationary. */
+.scroll-story .reference-wave-motion {
+ -webkit-mask-image:linear-gradient(to bottom,transparent 70%,black 76%,black 86%,transparent 88.5%)!important;
+ mask-image:linear-gradient(to bottom,transparent 70%,black 76%,black 86%,transparent 88.5%)!important;
+}
+@media(max-width:650px){
+ .scroll-story .story-sticky{height:520px!important;min-height:0!important;}
+ .scroll-story .reference-viewport{align-items:center;}
+ .scroll-story .reference-art{width:100%!important;height:auto!important;}
+}
