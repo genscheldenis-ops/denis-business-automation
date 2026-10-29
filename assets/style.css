@@ -1239,3 +1239,96 @@ body { background: var(--bg); color: var(--ink); }
  .scroll-story .reference-viewport{align-items:center;}
  .scroll-story .reference-art{width:100%!important;height:auto!important;}
 }
+
+/* V6.1 — ONLY the KI frame: one crisp moving dash per connection; no ghost. */
+.scroll-story .reference-dashed-network {overflow:visible;z-index:4;}
+.scroll-story .reference-dash {
+  fill:none!important;
+  stroke-opacity:1!important;
+  stroke-width:4.3!important;
+  stroke-dasharray:7 9!important;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:none!important;
+  animation:singleReferenceDash 1.35s linear infinite!important;
+  animation-delay:0s!important;
+}
+@keyframes singleReferenceDash {
+  from{stroke-dashoffset:0}
+  to{stroke-dashoffset:-64}
+}
+/* Side panels are mirrored continuations of the EXACT background artwork. They
+   occupy only the unused gutters; nothing in the central artwork gets stretched. */
+.scroll-story .reference-viewport::before{display:none!important;}
+.scroll-story .reference-viewport {gap:0;}
+.scroll-story .reference-side {
+  position:relative;
+  flex:1 1 0;
+  min-width:0;
+  height:100%;
+  align-self:stretch;
+  z-index:1;
+  overflow:hidden;
+  pointer-events:none;
+  background:#07154E;
+}
+.scroll-story .reference-side::before,
+.scroll-story .reference-side::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url('ki-reference-clean.webp');
+  background-repeat:no-repeat;
+  background-size:auto 100%;
+  transform:scaleX(-1);
+  pointer-events:none;
+}
+.scroll-story .reference-side-left::before,
+.scroll-story .reference-side-left::after {background-position:left center;}
+.scroll-story .reference-side-right::before,
+.scroll-story .reference-side-right::after {background-position:right center;}
+/* Extend the animated wave highlights into both side gutters with horizontal
+   movement only. The background itself stays perfectly stable. */
+.scroll-story .reference-side::after {
+  opacity:.27;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 69%,black 76%,black 88%,transparent 96%);
+  mask-image:linear-gradient(to bottom,transparent 69%,black 76%,black 88%,transparent 96%);
+  animation:referenceSideWave 14s ease-in-out infinite alternate;
+  will-change:background-position;
+}
+@keyframes referenceSideWave {
+  0% { background-position-x:0px; }
+  100% { background-position-x:20px; }
+}
+@media(max-width:650px) {
+ .scroll-story .reference-side{display:none;}
+}
+@media(prefers-reduced-motion:reduce){
+ .scroll-story .reference-dash,.scroll-story .reference-side::after{animation:none!important;}
+}
+
+/* V6.1 fine tuning: use color/wave-only extensions, not whole-image mirroring. */
+.scroll-story .reference-side::before,.scroll-story .reference-side::after {
+  transform:none!important;
+  background-size:auto 100%;
+}
+.scroll-story .reference-side-left::before,.scroll-story .reference-side-left::after {
+  background-image:url('ki-side-left.webp');
+  background-position:right center;
+}
+.scroll-story .reference-side-right::before,.scroll-story .reference-side-right::after {
+  background-image:url('ki-side-right.webp');
+  background-position:left center;
+}
+@keyframes referenceSideWave {
+  from{background-position-x:calc(100% - 7px);}
+  to{background-position-x:100%;}
+}
+/* Keep the static seam perfectly aligned with the main artwork. */
+.scroll-story .reference-side-right::after {
+  animation:referenceSideWaveRight 14s ease-in-out infinite alternate;
+}
+@keyframes referenceSideWaveRight {
+  from{background-position-x:-7px;}
+  to{background-position-x:0px;}
+}
