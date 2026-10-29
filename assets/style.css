@@ -1382,3 +1382,26 @@ body { background: var(--bg); color: var(--ink); }
  .scroll-story .reference-art{transform:translateY(-52px)!important;}
  .scroll-story .ki-fullwidth-wave{height:31%!important;}
 }
+
+/* V6.3 – seamless AI backdrop: extend the actual reference-art colors horizontally.
+   No independent blue panels; no change to the agent network or dashed arrows. */
+.scroll-story .reference-art {position:relative;isolation:isolate;}
+.scroll-story .reference-art::before,
+.scroll-story .reference-art::after {
+ content:"";display:block;position:absolute;top:0;height:100%;
+ width:max(50vw, 380px);pointer-events:none;z-index:0;
+ background-repeat:no-repeat;background-size:100% 100%;
+}
+.scroll-story .reference-art::before {
+ right:100%;background-image:url('ki-seamless-left.webp');
+}
+.scroll-story .reference-art::after {
+ left:100%;background-image:url('ki-seamless-right.webp');
+}
+.scroll-story .reference-art>.reference-image {position:relative;z-index:1;}
+.scroll-story .reference-art>.reference-dashed-network {z-index:4;}
+/* One cleaned-up transparent original wave layer, retaining all motion. */
+.scroll-story .ki-fullwidth-wave {mix-blend-mode:screen;filter:drop-shadow(0 0 4px rgba(31,166,255,.12));}
+@media(max-width:650px) {
+ .scroll-story .reference-art::before,.scroll-story .reference-art::after {display:none;}
+}
