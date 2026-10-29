@@ -1,0 +1,19 @@
+/* Same warm yellow as the site's primary buttons (#FFD45A).
+   Two restrained, feathered lights in the background; no layout changes. */
+.ki-workflow-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 19% 21% at 79% 9%, rgba(255,212,90,.42), rgba(255,212,90,.13) 40%, transparent 76%),
+    radial-gradient(ellipse 13% 20% at 5% 65%, rgba(255,212,90,.20), rgba(255,212,90,.06) 42%, transparent 75%);
+  mix-blend-mode: screen;
+}
+@media(max-width:900px) and (orientation:portrait) {
+  .ki-workflow-scene::after {
+    background:
+      radial-gradient(ellipse 33% 13% at 86% 3%, rgba(255,212,90,.40), rgba(255,212,90,.12) 42%, transparent 78%),
+      radial-gradient(ellipse 23% 17% at 3% 62%, rgba(255,212,90,.19), rgba(255,212,90,.05) 44%, transparent 76%);
+  }
+}
