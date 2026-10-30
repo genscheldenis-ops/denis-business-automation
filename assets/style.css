@@ -1408,3 +1408,7 @@ body { background: var(--bg); color: var(--ink); }
 
 /* 6.8.1: keep the relocated laptop visible in the narrow first-scene crop. */
 @media(max-width:560px){.story-desk-picture{background-position:32% center;}}
+
+/* 6.8.6: compact comparison directly before benefits. */
+.hero-image-wide.comparison-compact{max-width:700px!important;margin:24px auto 32px;}
+@media(max-width:560px){.hero-image-wide.comparison-compact{max-width:350px!important;margin:16px auto 24px;}.comparison-compact .hero-mobile-comparison img{height:145px;}}
