@@ -1409,6 +1409,10 @@ body { background: var(--bg); color: var(--ink); }
 /* 6.8.1: keep the relocated laptop visible in the narrow first-scene crop. */
 @media(max-width:560px){.story-desk-picture{background-position:32% center;}}
 
-/* 6.8.6: compact comparison directly before benefits. */
-.hero-image-wide.comparison-compact{max-width:700px!important;margin:24px auto 32px;}
-@media(max-width:560px){.hero-image-wide.comparison-compact{max-width:350px!important;margin:16px auto 24px;}.comparison-compact .hero-mobile-comparison img{height:145px;}}
+/* 6.8.7: comparison artwork integrated into the benefits section. */
+.benefits-section{padding-top:36px;}
+.hero-image-wide.benefits-image{width:100%;max-width:460px!important;margin:0 auto 28px;padding:0;}
+.benefits-image .hero-image-caption{font-size:12px;margin-top:10px;}
+.benefits-image .hero-image-frame{display:block;}
+.benefits-image .hero-mobile-comparison{display:none;}
+@media(max-width:560px){.benefits-section{padding-top:28px;}.hero-image-wide.benefits-image{max-width:320px!important;margin-bottom:24px;}.benefits-image .hero-image-caption{font-size:11px;}}
