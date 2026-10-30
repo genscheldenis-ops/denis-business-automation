@@ -1405,3 +1405,6 @@ body { background: var(--bg); color: var(--ink); }
 @media(max-width:650px) {
  .scroll-story .reference-art::before,.scroll-story .reference-art::after {display:none;}
 }
+
+/* 6.8.1: keep the relocated laptop visible in the narrow first-scene crop. */
+@media(max-width:560px){.story-desk-picture{background-position:32% center;}}
