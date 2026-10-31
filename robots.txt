@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://denis-business-automation.genschel-denis.workers.dev/sitemap.xml
