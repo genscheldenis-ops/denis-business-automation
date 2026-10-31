@@ -231,10 +231,26 @@
   // app.js updates scroll progress in its own animation frame. Observe that
   // change so a single scroll/jump starts motion after the scene has appeared.
   new MutationObserver(()=>{
+    startNearScene();
     if(visible()&&!raf)schedule();
     else if(!visible()&&raf){cancelAnimationFrame(raf);raf=0;previous=0;}
   }).observe(scene.closest('.scroll-story'),{attributes:true,attributeFilter:['style']});
-  img.addEventListener('load',load);
+  // Defer expensive animation preprocessing until the visitor approaches scene 2.
+  // The static artwork remains in place until the animation is ready.
+  const story = scene.closest('.scroll-story');
+  let started = false;
+  function startNearScene() {
+    if (started || reduce.matches) return;
+    const progress = Number(story?.style.getPropertyValue('--story-progress') || '0');
+    if (progress < 0.08) return;
+    started = true;
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => load(), {timeout: 550});
+    } else {
+      setTimeout(load, 25);
+    }
+  }
+  img.addEventListener('load',()=> { if (started) load(); else startNearScene(); });
   window.addEventListener('scroll',()=>{if(!raf&&visible())schedule();},{passive:true});
   document.addEventListener('visibilitychange',schedule);
   reduce.addEventListener('change',schedule);
@@ -245,5 +261,5 @@
     profile(){return active?.p;},
     status(){return {elapsed,showing,raf,visible:visible(),opacity:getComputedStyle(scene).opacity,rect:scene.getBoundingClientRect().toJSON()};}
   };
-  load();
+  startNearScene();
 })();
