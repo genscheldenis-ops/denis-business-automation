@@ -1,0 +1,11 @@
+/* The animated frame exactly follows the existing picture's box and crop. */
+.ki-workflow-scene .ki-motion-canvas {
+  position: absolute;
+  pointer-events: none;
+  display: block;
+}
+.ki-workflow-scene .ki-motion-canvas[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ki-workflow-scene .ki-motion-canvas { display: none; }
+  .ki-workflow-scene .ki-workflow-image { opacity: 1 !important; }
+}

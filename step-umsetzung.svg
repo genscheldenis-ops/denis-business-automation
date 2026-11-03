@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="340" viewBox="0 0 750 340" fill="none" role="img" aria-label="Illustration eines produktiven Dashboards mit erfolgreich abgeschlossenen Vorgängen">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="750" y2="340" gradientUnits="userSpaceOnUse"><stop stop-color="#E7F7EF"/><stop offset="1" stop-color="#CFECE2"/></linearGradient><filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#379D71" flood-opacity="0.12"/></filter></defs>
+<rect width="750" height="340" rx="32" fill="url(#bg)"/><circle cx="650" cy="38" r="190" fill="white" opacity=".30"/><circle cx="65" cy="320" r="160" fill="white" opacity=".22"/>
+
+<g filter="url(#shadow)"><rect x="95" y="42" width="523" height="258" rx="23" fill="white"/><rect x="95" y="42" width="523" height="42" rx="23" fill="#2C8068"/><rect x="95" y="65" width="523" height="19" fill="#2C8068"/><circle cx="124" cy="64" r="6" fill="#BDEBDC"/><circle cx="144" cy="64" r="6" fill="#BDEBDC"/>
+<rect x="130" y="117" width="212" height="38" rx="12" fill="#F0F8F4"/><rect x="130" y="165" width="212" height="38" rx="12" fill="#F0F8F4"/><rect x="130" y="213" width="212" height="38" rx="12" fill="#F0F8F4"/>
+<path d="m148 135 8 8 14-17m-22 57 8 8 14-17m-22 57 8 8 14-17" stroke="#17A075" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="186" y="132" width="118" height="9" rx="4.5" fill="#B5CFC1"/><rect x="186" y="180" width="118" height="9" rx="4.5" fill="#B5CFC1"/><rect x="186" y="228" width="118" height="9" rx="4.5" fill="#B5CFC1"/>
+<rect x="380" y="116" width="194" height="131" rx="14" fill="#F3FAF7"/><path d="M400 221h156" stroke="#D1E1D9" stroke-width="3"/><rect x="411" y="184" width="24" height="36" rx="5" fill="#95D4B7"/><rect x="446" y="158" width="24" height="62" rx="5" fill="#5DBA91"/><rect x="481" y="141" width="24" height="79" rx="5" fill="#349E78"/><rect x="516" y="129" width="24" height="91" rx="5" fill="#2C8068"/></g>
+<g filter="url(#shadow)"><circle cx="622" cy="104" r="50" fill="white"/><circle cx="622" cy="104" r="34" fill="#36A67C"/><path d="m604 105 12 12 24-27" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+</svg>

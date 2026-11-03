@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="340" viewBox="0 0 750 340" fill="none" role="img" aria-label="Illustration eines strukturierten Angebots mit Kostenübersicht">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="750" y2="340" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF0E7"/><stop offset="1" stop-color="#FFDECE"/></linearGradient><filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#BE724B" flood-opacity="0.12"/></filter></defs>
+<rect width="750" height="340" rx="32" fill="url(#bg)"/><circle cx="650" cy="38" r="190" fill="white" opacity=".30"/><circle cx="65" cy="320" r="160" fill="white" opacity=".22"/>
+
+<g filter="url(#shadow)"><rect x="145" y="37" width="405" height="281" rx="19" fill="white"/><rect x="185" y="77" width="186" height="17" rx="8" fill="#C8D3DC"/><rect x="185" y="112" width="317" height="10" rx="5" fill="#E5EAF0"/><rect x="185" y="133" width="284" height="10" rx="5" fill="#E5EAF0"/><rect x="185" y="169" width="315" height="1.5" fill="#E8EDF0"/><rect x="185" y="189" width="260" height="12" rx="6" fill="#E5EAF0"/><rect x="185" y="217" width="210" height="12" rx="6" fill="#E5EAF0"/><rect x="185" y="247" width="315" height="1.5" fill="#E8EDF0"/><rect x="360" y="263" width="140" height="23" rx="10" fill="#FAD9BE"/></g>
+<g filter="url(#shadow)"><rect x="460" y="134" width="169" height="125" rx="22" fill="#FFFDF9"/><circle cx="541" cy="181" r="37" fill="#FFE5C6"/><path d="M557 171h-21c-16 0-16 23 0 23h21m-8-34v47" stroke="#AD6D32" stroke-width="7" stroke-linecap="round"/></g>
+<path d="m79 274 49-68 18 13-48 69-23 7z" fill="#D98B57"/><path d="m79 274-4 21 23-7" fill="#3C4850"/>
+
+</svg>

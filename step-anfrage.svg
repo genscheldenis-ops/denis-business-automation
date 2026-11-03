@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="340" viewBox="0 0 750 340" fill="none" role="img" aria-label="Illustration einer Kundenanfrage mit Formular und Nachricht">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="750" y2="340" gradientUnits="userSpaceOnUse"><stop stop-color="#E8F2FF"/><stop offset="1" stop-color="#D2E8F4"/></linearGradient><filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#337BC2" flood-opacity="0.12"/></filter></defs>
+<rect width="750" height="340" rx="32" fill="url(#bg)"/><circle cx="650" cy="38" r="190" fill="white" opacity=".30"/><circle cx="65" cy="320" r="160" fill="white" opacity=".22"/>
+
+<rect x="86" y="55" width="425" height="247" rx="20" fill="white" filter="url(#shadow)"/>
+<rect x="86" y="55" width="425" height="42" rx="20" fill="#3F6797"/><rect x="86" y="80" width="425" height="17" fill="#3F6797"/>
+<circle cx="110" cy="76" r="5" fill="#FFBEBE"/><circle cx="128" cy="76" r="5" fill="#FFF1BA"/><circle cx="146" cy="76" r="5" fill="#C3F0D8"/>
+<rect x="115" y="125" width="140" height="13" rx="6" fill="#D3DEEA"/><rect x="115" y="157" width="362" height="27" rx="9" fill="#F5F8FC" stroke="#D8E4F1"/>
+<rect x="115" y="199" width="100" height="10" rx="5" fill="#D3DEEA"/><rect x="115" y="219" width="362" height="48" rx="9" fill="#F5F8FC" stroke="#D8E4F1"/>
+<rect x="365" y="278" width="112" height="15" rx="7.5" fill="#5C9DDD"/>
+<g filter="url(#shadow)"><rect x="453" y="123" width="216" height="136" rx="22" fill="#FFFFFF"/><path d="M497 164 L562 164 Q576 164 576 178 L576 219 L497 219 Z" fill="#E1F0FF"/><path d="M499 165 L538 192 L577 165" stroke="#4289CD" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="604" cy="151" r="25" fill="#4B9AF0"/><path d="M597 151h15m-7-8v16" stroke="white" stroke-width="5" stroke-linecap="round"/></g>
+
+</svg>
