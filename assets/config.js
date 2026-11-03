@@ -9,5 +9,5 @@ window.BUSINESS_AUTOMATION_CONFIG = Object.freeze({
   formspreeId: "mzeeeeag",
   googleAdsId: "",                   // z.B. "AW-123456789", erst nach Consent geladen
   googleAdsConversionLabel: "",      // aus der Google Ads Conversion-Aktion
-  ga4MeasurementId: ""                 // optional G-XXXXXXXXXX, aus Google Analytics 4
+  ga4MeasurementId: "GTM-WNJK44KV"                 // optional G-XXXXXXXXXX, aus Google Analytics 4
 });
