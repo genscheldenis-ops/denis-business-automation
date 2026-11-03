@@ -15,6 +15,7 @@
   const denied = Object.freeze({ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied'});
   let loaded = false;
   let consentReady = false;
+  let leadConsumed = false;
   let banner = null;
   let preferences = null;
   const listeners = [];
@@ -49,10 +50,14 @@
   function clearPending() { try { sessionStorage.removeItem(pendingKey); } catch (_e) {} }
 
   function finishLead() {
-    if (document.body.dataset.dgPage !== 'danke') return;
+    if (document.body.dataset.dgPage !== 'danke' || leadConsumed) return;
     let pending = null;
     try { pending = JSON.parse(sessionStorage.getItem(pendingKey) || 'null'); } catch (_e) {}
     if (!pending) return;
+    // Recheck saved consent before dispatch, including withdrawal in another tab.
+    if (JSON.stringify(readConsent()) !== JSON.stringify(preferences)) {
+      clearPending(); return;
+    }
     if (typeof pending.id !== 'string' || !/^[a-zA-Z0-9-]{10,80}$/.test(pending.id) ||
         !Number.isFinite(pending.time) || pending.time > Date.now() || Date.now() - pending.time >= 180000 ||
         !(allowsMeasurement() && pending.measurement === true || allowsAnalytics() && pending.analytics === true)) {
@@ -60,8 +65,13 @@
     }
     if (!consentReady) return; // Never fire before GTM's consent template has run.
     // Consume before push. If storage cannot be updated, do not risk duplicate events.
-    try { sessionStorage.removeItem(pendingKey); } catch (_e) { return; }
-    window.dataLayer.push({event:'dg_lead_success', form_id:'projektanfrage', transaction_id:pending.id,
+    try {
+      sessionStorage.removeItem(pendingKey);
+      if (sessionStorage.getItem(pendingKey) !== null) return;
+    } catch (_e) { return; }
+    leadConsumed = true;
+    // Only the verified receipt from recordLead can reach this event. No form data.
+    window.dataLayer.push({event:'dg_formspree_success', form_id:'projektanfrage', transaction_id:pending.id,
       dg_ads_measurement: allowsMeasurement() && pending.measurement === true,
       dg_analytics: allowsAnalytics() && pending.analytics === true});
   }
@@ -165,6 +175,7 @@
     recordLead() {
       clearPending();
       if (!allowsMeasurement() && !allowsAnalytics()) return;
+      if (JSON.stringify(readConsent()) !== JSON.stringify(preferences)) return;
       const receipt = {id:window.crypto?.randomUUID?.() || 'dg-'+Date.now()+'-'+Math.random().toString(36).slice(2),
         time:Date.now(), measurement:allowsMeasurement(), analytics:allowsAnalytics()};
       try { sessionStorage.setItem(pendingKey,JSON.stringify(receipt)); } catch (_e) {}

@@ -82,7 +82,9 @@
 
   // Contact form submits by HTTPS to Formspree; a server-accepted response is required.
   const form = document.getElementById('leadForm');
-  if (form) {
+  if (form && form.dataset.dgSubmitBound !== 'true') {
+    // Bind once even if this script is accidentally included twice.
+    form.dataset.dgSubmitBound = 'true';
     const chosen = new URLSearchParams(location.search).get('leistung');
     if (chosen) { const select = form.elements.namedItem('leistung'); if (select && [...select.options].some(o => o.value === chosen)) select.value = chosen; }
     const submit = document.getElementById('leadSubmit');
@@ -105,11 +107,13 @@
         });
         let json = {};
         try { json = await res.json(); } catch (_e) { /* formspree response may be empty */ }
-        if (!res.ok) {
-          const detail = Array.isArray(json.errors) ? json.errors.map(x => x.message).filter(Boolean).join(' ') : '';
+        const errors = Array.isArray(json?.errors) ? json.errors : [];
+        if (!res.ok || res.redirected || json?.ok === false || json?.success === false || errors.length || json?.error) {
+          const detail = errors.map(x => x?.message).filter(Boolean).join(' ');
           throw new Error(detail || 'Übermittlung nicht möglich. Bitte prüfen Sie Ihre Angaben oder versuchen Sie es später erneut.');
         }
-        window.DGPrivacy?.recordLead();
+        // Tracking must never turn an accepted inquiry into a form error/retry.
+        try { window.DGPrivacy?.recordLead(); } catch (_e) { /* Keep the successful redirect. */ }
         location.assign('danke.html');
       } catch (err) {
         message.textContent = 'Die Anfrage konnte nicht bestätigt werden: ' + (err?.message || 'Verbindungsfehler') + ' Alternativ erreichen Sie mich unter genschel.denis@gmail.com.';
