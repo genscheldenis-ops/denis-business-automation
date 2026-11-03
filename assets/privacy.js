@@ -1,6 +1,6 @@
-/* Shared consent gate. No remote request is made by this file before opt-in.
-   GTM is the only tag loader; install the supplied consent template in GTM.
-   The empty Ads/GA4 settings deliberately keep all measurement disabled. */
+/* Shared consent gate: GTM loads only after opt-in; GA4 requires separate consent.
+   Google tags are managed exclusively in GTM, not directly via gtag.js.
+   In GTM the GA4 Google tag MUST require analytics_storage as an additional consent. */
 (() => {
   'use strict';
   if (window.DGPrivacy) return;
@@ -9,8 +9,8 @@
   const adsConfigured = /^AW-\d{7,}$/.test(cfg.googleAdsId || '');
   const conversionReady = adsConfigured && /^[A-Za-z0-9_-]{5,}$/.test(cfg.googleAdsConversionLabel || '');
   const analyticsConfigured = /^G-[A-Z0-9]{6,}$/.test(cfg.ga4MeasurementId || '');
-  const consentKey = 'dg_business_privacy_v4';
-  const pendingKey = 'dg_verified_lead_v4';
+  const consentKey = 'dg_business_privacy_v5';
+  const pendingKey = 'dg_verified_lead_v5';
   const ttl = 180 * 24 * 60 * 60 * 1000;
   const denied = Object.freeze({ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied'});
   let loaded = false;
@@ -23,7 +23,7 @@
   function readConsent() {
     try {
       const saved = JSON.parse(localStorage.getItem(consentKey) || 'null');
-      if (saved && saved.version === 4 && saved.container === cfg.gtmContainerId &&
+      if (saved && saved.version === 5 && saved.container === cfg.gtmContainerId &&
           ['tagManager','measurement','remarketing','analytics'].every(k => typeof saved[k] === 'boolean') &&
           Number.isFinite(saved.savedAt) && saved.savedAt <= Date.now() && Date.now() - saved.savedAt < ttl) return saved;
       localStorage.removeItem(consentKey);
@@ -31,7 +31,13 @@
     return null;
   }
   preferences = readConsent();
-  try { localStorage.removeItem('dg_business_privacy_v3'); sessionStorage.removeItem('dg_verified_lead_v3'); } catch (_e) {}
+  // New analytics purpose requires fresh, explicit selection. No v4 consent is inherited.
+  try {
+    localStorage.removeItem('dg_business_privacy_v3');
+    localStorage.removeItem('dg_business_privacy_v4');
+    sessionStorage.removeItem('dg_verified_lead_v3');
+    sessionStorage.removeItem('dg_verified_lead_v4');
+  } catch (_e) {}
   const allowsMeasurement = () => !!(preferences?.tagManager && conversionReady && preferences.measurement);
   const allowsAnalytics = () => !!(preferences?.tagManager && analyticsConfigured && preferences.analytics);
   const payload = () => ({
@@ -104,7 +110,7 @@
   function storeConsent(tagManager, measurement, remarketing, analytics) {
     const previous = preferences;
     const before = payload();
-    preferences = {version:4, container:cfg.gtmContainerId,
+    preferences = {version:5, container:cfg.gtmContainerId,
       tagManager:!!tagManager && gtmConfigured,
       measurement:!!tagManager && !!measurement && conversionReady,
       remarketing:!!tagManager && !!remarketing && adsConfigured,
@@ -116,11 +122,13 @@
     const current = payload();
     const reduced = previous?.tagManager && !preferences.tagManager || Object.keys(before).some(k => before[k] === 'granted' && current[k] === 'denied');
     listeners.forEach(callback => { try { callback(current); } catch (_e) {} });
-    if (reduced) {
-      clearPending(); clearGoogleCookies();
-      // A removed script element alone cannot stop tags that are already running.
-      if (loaded) { location.reload(); return; }
-    }
+    if (reduced) { clearPending(); clearGoogleCookies(); }
+    // A Google-Tag with an Initialization trigger will not automatically fire
+    // when analytics consent is granted after GTM has already initialized.
+    // Reload on newly granted purpose as well as on withdrawal, but only when
+    // GTM was actually running; stored preferences are applied on the next load.
+    const newlyGranted = Object.keys(before).some(k => before[k] === 'denied' && current[k] === 'granted');
+    if (loaded && (reduced || newlyGranted)) { location.reload(); return; }
     if (!preferences.tagManager) clearPending();
     loadGTM(); finishLead();
   }
@@ -134,9 +142,9 @@
     const options = ['<label><input type="checkbox" data-consent-gtm> Google Tag Manager: technische Tag-Verwaltung laden</label>'];
     if (conversionReady) options.push('<label><input type="checkbox" data-consent-measurement> Google Ads: bestätigte Projektanfragen messen</label>');
     if (adsConfigured) options.push('<label><input type="checkbox" data-consent-remarketing> Google Ads: Remarketing und personalisierte Werbung</label>');
-    if (analyticsConfigured) options.push('<label><input type="checkbox" data-consent-analytics> Google Analytics: pseudonyme Nutzungsstatistiken</label>');
+    if (analyticsConfigured) options.push('<label><input type="checkbox" data-consent-analytics> Google Analytics 4: Website-Nutzung statistisch auswerten</label>');
     const inactive = !adsConfigured && !analyticsConfigured ? ' Anzeigenmessung, Remarketing und Google Analytics sind derzeit nicht aktiviert.' : '';
-    banner.innerHTML = `<div><div class="consent-heading">Datenschutzeinstellungen</div><p>Mit Ihrer Zustimmung wird Google Tag Manager von Google Ireland geladen. Dabei werden Ihre IP-Adresse und technische Verbindungsdaten an Google übermittelt; eine Verarbeitung in den USA ist möglich.${inactive} Das Kontaktformular funktioniert ohne Zustimmung. Ihre Auswahl ist jederzeit über „Tracking-Einstellungen“ widerrufbar. <a href="datenschutz.html">Datenschutzerklärung</a></p><div class="consent-options">${options.join('')}</div></div><div class="consent-actions"><button type="button" class="btn" data-consent-no>Alle ablehnen</button><button type="button" class="btn" data-consent-all>Alle akzeptieren</button><button type="button" class="btn" data-consent-save>Auswahl speichern</button></div>`;
+    banner.innerHTML = `<div><div class="consent-heading">Datenschutzeinstellungen</div><p>Mit Ihrer Zustimmung wird Google Tag Manager von Google Ireland geladen. Dabei werden Ihre IP-Adresse und technische Verbindungsdaten an Google übermittelt; eine Verarbeitung in den USA ist möglich.${inactive} Google Analytics wird nur nach zusätzlicher Zustimmung aktiviert. Das Kontaktformular funktioniert ohne Zustimmung. Ihre Auswahl ist jederzeit über „Tracking-Einstellungen“ widerrufbar. <a href="datenschutz.html">Datenschutzerklärung</a></p><div class="consent-options">${options.join('')}</div></div><div class="consent-actions"><button type="button" class="btn" data-consent-no>Alle ablehnen</button><button type="button" class="btn" data-consent-all>Alle akzeptieren</button><button type="button" class="btn" data-consent-save>Auswahl speichern</button></div>`;
     document.body.appendChild(banner);
     const t = banner.querySelector('[data-consent-gtm]');
     const m = banner.querySelector('[data-consent-measurement]');
