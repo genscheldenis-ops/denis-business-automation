@@ -1,13 +1,10 @@
-/* EINMALIG KONFIGURIEREN – siehe DOKUMENTATION/01_UPLOAD_UND_FREISCHALTUNG.md im ZIP
-   Diese Kennungen sind oeffentliche Website-Konfiguration, keine geheimen API-Schluessel.
-   Formspree: Konto erstellen, E-Mail-Empfang verifizieren und Formular-ID kopieren.
-   Google Ads: Konto-ID (AW-...) und Conversion-Label (nur aus Google Ads) eintragen.
-   Optional GA4: Measurement-ID (G-...) nach Einrichtung der Property.
-   Kein Google Tag laedt ohne aktive Einwilligung.
-*/
+/* Public configuration. GTM is the only Google loader. No direct gtag.js.
+   Ads/GA4 stay disabled until real identifiers AND matching GTM tags exist.
+   See DOKUMENTATION/02_GTM.md before enabling additional purposes. */
 window.BUSINESS_AUTOMATION_CONFIG = Object.freeze({
   formspreeId: "mzeeeeag",
-  googleAdsId: "",                   // z.B. "AW-123456789", erst nach Consent geladen
-  googleAdsConversionLabel: "",      // aus der Google Ads Conversion-Aktion
-  ga4MeasurementId: "GTM-WNJK44KV"                 // optional G-XXXXXXXXXX, aus Google Analytics 4
+  gtmContainerId: "GTM-WNJK44KV",
+  googleAdsId: "",
+  googleAdsConversionLabel: "",
+  ga4MeasurementId: ""
 });
