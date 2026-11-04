@@ -1,0 +1,13 @@
+{
+  "name": "denis-business-automation",
+  "main": "migration-worker.mjs",
+  "compatibility_date": "2026-11-04",
+  "workers_dev": true,
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "not_found_handling": "none",
+    "run_worker_first": true
+  }
+}
