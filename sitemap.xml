@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://denis-business-automation.genschel-denis.workers.dev/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url><url><loc>https://denis-business-automation.genschel-denis.workers.dev/rechnungen-automatisieren.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url><url><loc>https://denis-business-automation.genschel-denis.workers.dev/crm-automatisieren.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url><url><loc>https://denis-business-automation.genschel-denis.workers.dev/prozesse-automatisieren.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url><url><loc>https://denis-business-automation.genschel-denis.workers.dev/anfrage.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://genschel-automation.de/</loc>
+  </url>
+  <url>
+    <loc>https://genschel-automation.de/rechnungen-automatisieren.html</loc>
+  </url>
+  <url>
+    <loc>https://genschel-automation.de/crm-automatisieren.html</loc>
+  </url>
+  <url>
+    <loc>https://genschel-automation.de/prozesse-automatisieren.html</loc>
+  </url>
+  <url>
+    <loc>https://genschel-automation.de/anfrage.html</loc>
+  </url>
+</urlset>
