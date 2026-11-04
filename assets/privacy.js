@@ -1,6 +1,9 @@
-/* Shared consent gate: GTM loads only after opt-in; GA4 requires separate consent.
-   Google tags are managed exclusively in GTM, not directly via gtag.js.
-   In GTM the GA4 Google tag MUST require analytics_storage as an additional consent. */
+/* Basic Consent Mode v2: GTM loads only after consent to statistics or marketing.
+   Analytics, advertising measurement and personalized advertising are distinct purposes.
+   The existing GTM consent template MUST call DGConsentSubscribe and use the
+   GTM APIs setDefaultConsentState/updateConsentState. GA4 tags MUST require
+   analytics_storage additionally; advertising tags must respect ad consent.
+   No Google Ads tag/ID is invented or injected by this script. */
 (() => {
   'use strict';
   if (window.DGPrivacy) return;
@@ -9,8 +12,9 @@
   const adsConfigured = /^AW-\d{7,}$/.test(cfg.googleAdsId || '');
   const conversionReady = adsConfigured && /^[A-Za-z0-9_-]{5,}$/.test(cfg.googleAdsConversionLabel || '');
   const analyticsConfigured = /^G-[A-Z0-9]{6,}$/.test(cfg.ga4MeasurementId || '');
-  const consentKey = 'dg_business_privacy_v5';
-  const pendingKey = 'dg_verified_lead_v5';
+  // New purposes: deliberately do not adopt the former v5 consent silently.
+  const consentKey = 'dg_business_privacy_v6';
+  const pendingKey = 'dg_verified_lead_v6';
   const ttl = 180 * 24 * 60 * 60 * 1000;
   const denied = Object.freeze({ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied'});
   let loaded = false;
@@ -24,28 +28,27 @@
   function readConsent() {
     try {
       const saved = JSON.parse(localStorage.getItem(consentKey) || 'null');
-      if (saved && saved.version === 5 && saved.container === cfg.gtmContainerId &&
-          ['tagManager','measurement','remarketing','analytics'].every(k => typeof saved[k] === 'boolean') &&
+      if (saved && saved.version === 6 && saved.container === cfg.gtmContainerId &&
+          ['analytics','marketing','personalization'].every(k => typeof saved[k] === 'boolean') &&
+          (!saved.personalization || saved.marketing) &&
           Number.isFinite(saved.savedAt) && saved.savedAt <= Date.now() && Date.now() - saved.savedAt < ttl) return saved;
       localStorage.removeItem(consentKey);
-    } catch (_e) { /* No storage means no remembered consent. */ }
+    } catch (_e) { /* Storage unavailable: no retained consent. */ }
     return null;
   }
   preferences = readConsent();
-  // New analytics purpose requires fresh, explicit selection. No v4 consent is inherited.
   try {
-    localStorage.removeItem('dg_business_privacy_v3');
-    localStorage.removeItem('dg_business_privacy_v4');
-    sessionStorage.removeItem('dg_verified_lead_v3');
-    sessionStorage.removeItem('dg_verified_lead_v4');
+    ['dg_business_privacy_v3','dg_business_privacy_v4','dg_business_privacy_v5'].forEach(k => localStorage.removeItem(k));
+    ['dg_verified_lead_v3','dg_verified_lead_v4','dg_verified_lead_v5'].forEach(k => sessionStorage.removeItem(k));
   } catch (_e) {}
-  const allowsMeasurement = () => !!(preferences?.tagManager && conversionReady && preferences.measurement);
-  const allowsAnalytics = () => !!(preferences?.tagManager && analyticsConfigured && preferences.analytics);
+  const permitsGTM = () => !!(gtmConfigured && (preferences?.analytics || preferences?.marketing));
+  const allowsAnalytics = () => !!(permitsGTM() && analyticsConfigured && preferences.analytics);
+  const allowsMeasurement = () => !!(permitsGTM() && conversionReady && preferences.marketing);
   const payload = () => ({
-    ad_storage: preferences?.tagManager && adsConfigured && (allowsMeasurement() || preferences.remarketing) ? 'granted':'denied',
-    ad_user_data: preferences?.tagManager && adsConfigured && (allowsMeasurement() || preferences.remarketing) ? 'granted':'denied',
-    ad_personalization: preferences?.tagManager && adsConfigured && preferences.remarketing ? 'granted':'denied',
-    analytics_storage: allowsAnalytics() ? 'granted':'denied'
+    analytics_storage: allowsAnalytics() ? 'granted' : 'denied',
+    ad_storage: permitsGTM() && preferences.marketing ? 'granted' : 'denied',
+    ad_user_data: permitsGTM() && preferences.marketing ? 'granted' : 'denied',
+    ad_personalization: permitsGTM() && preferences.marketing && preferences.personalization ? 'granted' : 'denied'
   });
   function clearPending() { try { sessionStorage.removeItem(pendingKey); } catch (_e) {} }
 
@@ -54,30 +57,25 @@
     let pending = null;
     try { pending = JSON.parse(sessionStorage.getItem(pendingKey) || 'null'); } catch (_e) {}
     if (!pending) return;
-    // Recheck saved consent before dispatch, including withdrawal in another tab.
-    if (JSON.stringify(readConsent()) !== JSON.stringify(preferences)) {
-      clearPending(); return;
-    }
+    if (JSON.stringify(readConsent()) !== JSON.stringify(preferences)) { clearPending(); return; }
     if (typeof pending.id !== 'string' || !/^[a-zA-Z0-9-]{10,80}$/.test(pending.id) ||
         !Number.isFinite(pending.time) || pending.time > Date.now() || Date.now() - pending.time >= 180000 ||
-        !(allowsMeasurement() && pending.measurement === true || allowsAnalytics() && pending.analytics === true)) {
+        !((allowsMeasurement() && pending.measurement === true) || (allowsAnalytics() && pending.analytics === true))) {
       clearPending(); return;
     }
-    if (!consentReady) return; // Never fire before GTM's consent template has run.
-    // Consume before push. If storage cannot be updated, do not risk duplicate events.
+    if (!consentReady) return;
     try {
       sessionStorage.removeItem(pendingKey);
       if (sessionStorage.getItem(pendingKey) !== null) return;
     } catch (_e) { return; }
     leadConsumed = true;
-    // Only the verified receipt from recordLead can reach this event. No form data.
+    // Data layer contains neither names nor contact-form content.
     window.dataLayer.push({event:'dg_formspree_success', form_id:'projektanfrage', transaction_id:pending.id,
       dg_ads_measurement: allowsMeasurement() && pending.measurement === true,
       dg_analytics: allowsAnalytics() && pending.analytics === true});
   }
 
-  // Called by the sandboxed GTM template using callInWindow. Its callback uses
-  // setDefaultConsentState/updateConsentState, not a queued gtag consent update.
+  // Existing GTM Consent Mode v2 template subscribes with callInWindow.
   window.DGConsentSubscribe = function (callback) {
     if (typeof callback !== 'function') return;
     listeners.push(callback);
@@ -86,11 +84,10 @@
     setTimeout(finishLead, 0);
   };
   function loadGTM() {
-    if (!gtmConfigured || !preferences?.tagManager || loaded) return;
+    if (!permitsGTM() || loaded) return;
     loaded = true;
     window.dataLayer = window.dataLayer || [];
-    // Defensive default before gtm.start. The supplied GTM template establishes
-    // the authoritative state through Google's GTM consent APIs.
+    // Defensive state: the GTM template is authoritative and uses its consent APIs.
     function queue() { window.dataLayer.push(arguments); }
     queue('consent', 'default', {...denied});
     queue('set', 'ads_data_redaction', true);
@@ -117,29 +114,27 @@
       });
     });
   }
-  function storeConsent(tagManager, measurement, remarketing, analytics) {
-    const previous = preferences;
-    const before = payload();
-    preferences = {version:5, container:cfg.gtmContainerId,
-      tagManager:!!tagManager && gtmConfigured,
-      measurement:!!tagManager && !!measurement && conversionReady,
-      remarketing:!!tagManager && !!remarketing && adsConfigured,
-      analytics:!!tagManager && !!analytics && analyticsConfigured, savedAt:Date.now()};
+  function storeConsent(analytics, marketing, personalization) {
+    const previous = payload();
+    const wasLoaded = loaded;
+    preferences = {version:6, container:cfg.gtmContainerId,
+      analytics:!!analytics && analyticsConfigured,
+      marketing:!!marketing && gtmConfigured,
+      personalization:!!personalization && !!marketing && gtmConfigured,
+      savedAt:Date.now()};
     try { localStorage.setItem(consentKey, JSON.stringify(preferences)); } catch (_e) {
       try { localStorage.removeItem(consentKey); } catch (_ignored) {}
     }
     banner?.remove(); banner = null;
     const current = payload();
-    const reduced = previous?.tagManager && !preferences.tagManager || Object.keys(before).some(k => before[k] === 'granted' && current[k] === 'denied');
+    const reduced = Object.keys(previous).some(k => previous[k] === 'granted' && current[k] === 'denied');
     listeners.forEach(callback => { try { callback(current); } catch (_e) {} });
     if (reduced) { clearPending(); clearGoogleCookies(); }
-    // A Google-Tag with an Initialization trigger will not automatically fire
-    // when analytics consent is granted after GTM has already initialized.
-    // Reload on newly granted purpose as well as on withdrawal, but only when
-    // GTM was actually running; stored preferences are applied on the next load.
-    const newlyGranted = Object.keys(before).some(k => before[k] === 'denied' && current[k] === 'granted');
-    if (loaded && (reduced || newlyGranted)) { location.reload(); return; }
-    if (!preferences.tagManager) clearPending();
+    // Reload when a previously running tag changes permission; GTM initialization
+    // triggers otherwise won't automatically fire on a newly granted purpose.
+    const newlyGranted = Object.keys(previous).some(k => previous[k] === 'denied' && current[k] === 'granted');
+    if (wasLoaded && (reduced || newlyGranted || !permitsGTM())) { location.reload(); return; }
+    if (!permitsGTM()) clearPending();
     loadGTM(); finishLead();
   }
   function showConsent() {
@@ -147,31 +142,31 @@
     banner?.remove();
     banner = document.createElement('div');
     banner.className = 'consent-banner';
-    banner.setAttribute('role','region');
-    banner.setAttribute('aria-label','Datenschutzeinstellungen');
-    const options = ['<label><input type="checkbox" data-consent-gtm> Google Tag Manager: technische Tag-Verwaltung laden</label>'];
-    if (conversionReady) options.push('<label><input type="checkbox" data-consent-measurement> Google Ads: bestätigte Projektanfragen messen</label>');
-    if (adsConfigured) options.push('<label><input type="checkbox" data-consent-remarketing> Google Ads: Remarketing und personalisierte Werbung</label>');
-    if (analyticsConfigured) options.push('<label><input type="checkbox" data-consent-analytics> Google Analytics 4: Website-Nutzung statistisch auswerten</label>');
-    const inactive = !adsConfigured && !analyticsConfigured ? ' Anzeigenmessung, Remarketing und Google Analytics sind derzeit nicht aktiviert.' : '';
-    banner.innerHTML = `<div><div class="consent-heading">Datenschutzeinstellungen</div><p>Mit Ihrer Zustimmung wird Google Tag Manager von Google Ireland geladen. Dabei werden Ihre IP-Adresse und technische Verbindungsdaten an Google übermittelt; eine Verarbeitung in den USA ist möglich.${inactive} Google Analytics wird nur nach zusätzlicher Zustimmung aktiviert. Das Kontaktformular funktioniert ohne Zustimmung. Ihre Auswahl ist jederzeit über „Tracking-Einstellungen“ widerrufbar. <a href="datenschutz.html">Datenschutzerklärung</a></p><div class="consent-options">${options.join('')}</div></div><div class="consent-actions"><button type="button" class="btn" data-consent-no>Alle ablehnen</button><button type="button" class="btn" data-consent-all>Alle akzeptieren</button><button type="button" class="btn" data-consent-save>Auswahl speichern</button></div>`;
+    banner.setAttribute('role', 'region');
+    banner.setAttribute('aria-label', 'Datenschutzeinstellungen');
+    banner.innerHTML = `<div class="consent-content"><div class="consent-heading">Datenschutzeinstellungen</div>
+      <p>Notwendige Funktionen (Seitenaufruf, Sicherheit, Anfrageformular) sind immer aktiv. Statistik und Marketing sind freiwillig und zunächst deaktiviert. Erst nach Ihrer Zustimmung wird Google Tag Manager für die gewählten Zwecke geladen. Dabei können technische Verbindungsdaten an Google übermittelt und in den USA verarbeitet werden. Ihre Auswahl können Sie jederzeit unter „Tracking-Einstellungen“ ändern. <a href="datenschutz.html">Datenschutzerklärung</a></p>
+      <div class="consent-options">
+        <div class="consent-option consent-required"><strong>Notwendig</strong><small>Website und Kontaktformular – immer aktiv</small></div>
+        <label class="consent-option"><input type="checkbox" data-consent-analytics><span><strong>Statistik (Google Analytics 4)</strong><small>Besuche und bestätigte Projektanfragen auswerten</small></span></label>
+        <label class="consent-option"><input type="checkbox" data-consent-marketing><span><strong>Marketing (Google Ads)</strong><small>Einwilligung für Werbemessung und Zuordnung von Anzeigenklicks</small></span></label>
+        <label class="consent-option"><input type="checkbox" data-consent-personalization><span><strong>Personalisierte Werbung</strong><small>Zusätzliches Einverständnis für Remarketing und personalisierte Anzeigen</small></span></label>
+      </div></div><div class="consent-actions"><button type="button" class="btn" data-consent-no>Alle ablehnen</button><button type="button" class="btn" data-consent-all>Alle akzeptieren</button><button type="button" class="btn" data-consent-save>Auswahl speichern</button></div>`;
     document.body.appendChild(banner);
-    const t = banner.querySelector('[data-consent-gtm]');
-    const m = banner.querySelector('[data-consent-measurement]');
-    const r = banner.querySelector('[data-consent-remarketing]');
     const a = banner.querySelector('[data-consent-analytics]');
-    t.checked = !!preferences?.tagManager;
-    if (m) m.checked = !!preferences?.measurement;
-    if (r) r.checked = !!preferences?.remarketing;
-    if (a) a.checked = !!preferences?.analytics;
-    [m,r,a].filter(Boolean).forEach(input => input.addEventListener('change', () => { if (input.checked) t.checked = true; }));
-    t.addEventListener('change', () => { if (!t.checked) [m,r,a].filter(Boolean).forEach(input => { input.checked = false; }); });
-    banner.querySelector('[data-consent-no]').addEventListener('click', () => storeConsent(false,false,false,false));
-    banner.querySelector('[data-consent-all]').addEventListener('click', () => storeConsent(true,!!m,!!r,!!a));
-    banner.querySelector('[data-consent-save]').addEventListener('click', () => storeConsent(t.checked,m?.checked,r?.checked,a?.checked));
+    const m = banner.querySelector('[data-consent-marketing]');
+    const p = banner.querySelector('[data-consent-personalization]');
+    a.checked = !!preferences?.analytics;
+    m.checked = !!preferences?.marketing;
+    p.checked = !!preferences?.personalization;
+    m.addEventListener('change', () => { if (!m.checked) p.checked = false; });
+    p.addEventListener('change', () => { if (p.checked) m.checked = true; });
+    banner.querySelector('[data-consent-no]').addEventListener('click', () => storeConsent(false,false,false));
+    banner.querySelector('[data-consent-all]').addEventListener('click', () => storeConsent(true,true,true));
+    banner.querySelector('[data-consent-save]').addEventListener('click', () => storeConsent(a.checked,m.checked,p.checked));
   }
   window.DGPrivacy = Object.freeze({
-    // A successful Formspree response is the only production caller.
+    // Called only after an HTTP-successful Formspree POST in app.js.
     recordLead() {
       clearPending();
       if (!allowsMeasurement() && !allowsAnalytics()) return;
@@ -182,7 +177,6 @@
     }
   });
   buttons.forEach(button => { button.hidden = !gtmConfigured; button.addEventListener('click', showConsent); });
-  // Synchronize withdrawal in other tabs and restore-from-back-cache navigation.
   window.addEventListener('storage', event => {
     if (event.key === consentKey || event.key === null) location.reload();
   });
