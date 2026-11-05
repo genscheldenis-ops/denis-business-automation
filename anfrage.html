@@ -4,7 +4,7 @@
 <p class="hint" id="formIntro">Alle Angaben dienen ausschließlich der Kontaktaufnahme und Angebotserstellung. Felder mit * sind erforderlich.</p>
 <label for="name">Ihr Name *</label>
 <input autocomplete="name" id="name" maxlength="120" name="name" placeholder="Vor- und Nachname" required=""/>
-<label for="firma">Unternehmen</label>
+<label for="firma">Unternehmen (optional)</label>
 <input autocomplete="organization" id="firma" maxlength="160" name="firma" placeholder="Unternehmensname"/>
 <label for="email">Ihre E-Mail-Adresse *</label>
 <input autocomplete="email" id="email" maxlength="200" name="email" placeholder="name@unternehmen.de" required="" type="email"/>
@@ -17,10 +17,11 @@
 <option value="pilot">Kleines Pilotprojekt</option>
 <option value="betreuung">Laufende Betreuung</option>
 <option value="sonstiges">Andere Aufgabe / Noch nicht sicher</option></select>
-<label for="menge">Wie viele Vorgänge fallen ungefähr an?</label>
+<label for="menge">Wie viele Vorgänge fallen ungefähr an? (optional)</label>
 <select id="menge" name="menge"><option value="">Noch unklar</option><option>Bis 50 pro Monat</option><option>50–250 pro Monat</option><option>Mehr als 250 pro Monat</option></select>
-<label for="nachricht">Beschreiben Sie die Aufgabe *</label>
-<textarea id="nachricht" maxlength="4000" minlength="15" name="nachricht" placeholder="Was passiert heute manuell, welche Programme nutzen Sie und was soll künftig automatisch laufen?" required=""></textarea>
+<label for="nachricht">Was möchten Sie automatisieren? *</label>
+<p class="hint" id="taskHint">Wenige Sätze genügen: Was erledigen Sie von Hand, welche Programme nutzen Sie und was soll sich verbessern?</p>
+<textarea id="nachricht" maxlength="4000" minlength="15" name="nachricht" aria-describedby="taskHint" placeholder="Zum Beispiel: Wir übertragen jede Woche Anfragen aus E-Mails in unser CRM und möchten diesen Schritt automatisieren." required=""></textarea>
 <div aria-hidden="true" class="visually-hidden"><label for="company-site">Dieses Feld bitte leer lassen</label><input autocomplete="off" id="company-site" name="_gotcha" tabindex="-1" type="text"/></div>
 <input name="_subject" type="hidden" value="Neue Anfrage – Denis Genschel Business Automation"/>
 <label class="privacy-confirm"><input name="datenschutzhinweis_gelesen" required="" type="checkbox" value="ja"/><span>Ich habe die <a href="datenschutz.html" rel="noopener" target="_blank">Datenschutzhinweise</a> gelesen und verstanden, dass meine Angaben zur Bearbeitung meiner Anfrage an Formspree übermittelt werden. *</span></label>
