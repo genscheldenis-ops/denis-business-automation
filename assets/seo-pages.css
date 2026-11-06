@@ -1,0 +1,11 @@
+/* Scoped additions for the SEO landing pages; original design and assets retained. */
+.subhero .grid > *, .section-head > *, .comparison > *, .work-grid > * { min-width: 0; }
+h1, h2, h3 { overflow-wrap: anywhere; hyphens: manual; }
+.sub a:not(.btn), .compare p a { text-decoration: underline; text-underline-offset: .18em; }
+.aside-visual .flow-item { background: #F0F6F6; border-color: #D4E3E5; color: #173E4B; }
+.aside-visual .flow-arrow, .aside-visual .label { color: #185C70; }
+@media (max-width: 580px) {
+  .subhero .grid { gap: 32px; }
+  .subhero h1 { font-size: clamp(34px, 9.5vw, 42px); }
+  .cta-line .btn { width: 100%; text-align: center; }
+}
