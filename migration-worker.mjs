@@ -4,7 +4,7 @@ const oldHost = 'denis-business-automation.genschel-denis.workers.dev';
 const verificationPath = '/google85867acecd647a0a.html';
 const pages = [
   'rechnungen-automatisieren', 'crm-automatisieren',
-  'prozesse-automatisieren', 'anfrage', 'impressum', 'datenschutz', 'danke'
+  'prozesse-automatisieren', 'n8n-automatisierung', 'ki-automatisierung', 'anfrage', 'impressum', 'datenschutz', 'danke'
 ];
 const aliases = new Map([['/index.html', '/'], ['/index', '/']]);
 for (const page of pages) {
