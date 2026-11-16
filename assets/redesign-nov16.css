@@ -99,3 +99,19 @@
 .dg-network-section{padding-bottom:clamp(24px,3vw,44px);}
 .dg-redesign-hero>.dg-hero-heading{padding-top:clamp(55px,7vw,100px);padding-bottom:0;}
 .dg-redesign-hero>.dg-hero-details{padding-top:36px;}
+
+
+/* 16.11.2026: Farbverlaeufe wie im bereits vorhandenen Pilot-CTA-Banner.
+   Alle vier Leistungskarten und "Klare Kosten" erhalten exakt denselben Hintergrund. */
+:root{--dg-cta-soft-gradient:linear-gradient(105deg, #e9f3f5 0%, #eef7f7 28%, #f5faf9 60%, #fff8e9 100%);}
+.dg-solutions .dg-solution-link,
+.dg-trust-section .dg-value-card.dg-value-card-featured{
+  background:var(--dg-cta-soft-gradient);
+  border-color:#d3e3e5;
+  color:#223d46;
+}
+.dg-trust-section .dg-value-card.dg-value-card-featured h3{color:#244653;}
+.dg-trust-section .dg-value-card.dg-value-card-featured>span{color:#146179;}
+.dg-trust-section .dg-value-card.dg-value-card-featured p{color:#607179;}
+.dg-solutions .dg-solution-link:hover,
+.dg-solutions .dg-solution-link:focus-visible{box-shadow:0 14px 28px rgba(26,73,86,.09);}
