@@ -1,0 +1,35 @@
+/* Genschel Automation: Kundenstimmen, responsive und ohne zusätzliche JS-Abhängigkeit. */
+.dg-testimonials{background:#f8f8f6;scroll-margin-top:90px;}
+.dg-testimonials .dg-center-heading{max-width:850px;}
+.dg-testimonials .dg-center-heading h2{font-size:clamp(32px,3.2vw,52px);}
+.dg-testimonial-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch;}
+.dg-review-card{background:#fff;border:1px solid #dae5e5;border-radius:26px;padding:27px 27px 25px;display:flex;flex-direction:column;gap:10px;min-width:0;box-shadow:0 12px 35px rgba(19,65,81,.045);color:#223b44;}
+.dg-review-card--featured{background:#185c70;border-color:#185c70;color:#fff;}
+.dg-review-type{font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;line-height:1.45;color:#1d7285;min-height:32px;}
+.dg-review-card--featured .dg-review-type{color:#c1ebed;}
+.dg-review-mark{font-size:64px;font-family:Georgia,serif;line-height:.7;font-weight:600;opacity:.65;color:#d2a342;margin:12px 0 0;}
+.dg-review-card--featured .dg-review-mark{color:#ffe095;opacity:1;}
+.dg-review-details{flex:1;min-height:0;}
+.dg-review-details summary{display:flex;flex-direction:column;gap:15px;cursor:pointer;list-style:none;}
+.dg-review-details summary::-webkit-details-marker{display:none;}
+.dg-review-excerpt{font-size:clamp(17px,1.35vw,19px);line-height:1.55;font-weight:480;letter-spacing:-.015em;}
+.dg-review-expand{display:flex;align-items:center;gap:8px;color:#12667b;font-weight:750;font-size:13px;line-height:1.5;text-underline-offset:3px;text-decoration:underline;}
+.dg-review-card--featured .dg-review-expand{color:#ffe2a0;}
+.dg-review-details[open] .dg-review-open-label{display:none;}
+.dg-review-details:not([open]) .dg-review-close-label{display:none;}
+.dg-review-details[open] .dg-review-chevron{transform:rotate(180deg);}
+.dg-review-chevron{display:inline-block;font-size:19px;text-decoration:none;transition:transform .2s;}
+.dg-review-details summary:focus-visible{outline:3px solid #e4b652;outline-offset:5px;border-radius:5px;}
+.dg-review-details blockquote{margin:18px 0 0;padding:18px 0 0;border:0;border-top:1px solid #d7e4e7;}
+.dg-review-card--featured .dg-review-details blockquote{border-color:rgba(255,255,255,.28);}
+.dg-review-details blockquote p{margin:0;font-size:15px;line-height:1.75;color:inherit;overflow-wrap:anywhere;}
+.dg-review-author{display:flex;align-items:center;gap:12px;border-top:1px solid #dae5e5;padding-top:20px;margin-top:20px;}
+.dg-review-card--featured .dg-review-author{border-color:rgba(255,255,255,.27);}
+.dg-review-author-icon{width:44px;height:44px;flex:0 0 44px;border-radius:50%;background:#e9f3f5;display:flex;align-items:center;justify-content:center;color:#165d70;font-size:18px;font-weight:800;}
+.dg-review-card--featured .dg-review-author-icon{background:#fff;color:#185c70;}
+.dg-review-author>div{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.dg-review-author strong{font-size:17px;line-height:1.25;}
+.dg-review-author>div>span{font-size:12px;opacity:.72;line-height:1.35;}
+@media(max-width:980px){.dg-testimonial-grid{grid-template-columns:1fr;max-width:690px;margin:0 auto;}.dg-review-card{padding:24px 24px 22px;}.dg-review-type{min-height:0;}.dg-review-mark{margin-top:8px;}}
+@media(max-width:520px){.dg-review-card{border-radius:20px;padding:22px 19px;}.dg-review-excerpt{font-size:17px;}.dg-review-details blockquote p{font-size:14px;}}
+@media(prefers-reduced-motion:reduce){.dg-review-chevron{transition:none;}}
