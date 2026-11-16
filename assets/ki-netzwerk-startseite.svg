@@ -1,0 +1,88 @@
+<svg aria-labelledby="ki-desktop-title ki-desktop-desc" class="ki-artwork ki-artwork-desktop" preserveaspectratio="xMidYMid slice" role="img" viewbox="0 0 1983 793" xmlns="http://www.w3.org/2000/svg">
+<title id="ki-desktop-title">Mehrere KI-Agenten. Gemeinsam automatisiert.</title>
+<desc id="ki-desktop-desc">Postfach-Anfragen und PDF-Rechnungen durchlaufen die KI-Agenten Lesen, Auslesen, Prüfen und Zuordnen. CRM-Agent und Ablage-Agent übernehmen Kontaktpflege und Dokumentenablage.</desc>
+<defs>
+<radialgradient cx="28%" cy="20%" id="ki-desktop-navy" r="95%"><stop offset="0%" stop-color="#133978"></stop><stop offset="62%" stop-color="#082255"></stop><stop offset="100%" stop-color="#041737"></stop></radialgradient>
+<radialgradient cx="28%" cy="20%" id="ki-desktop-blue" r="95%"><stop offset="0%" stop-color="#0097ff"></stop><stop offset="62%" stop-color="#0752ff"></stop><stop offset="100%" stop-color="#1535cc"></stop></radialgradient>
+<radialgradient cx="28%" cy="20%" id="ki-desktop-amber" r="95%"><stop offset="0%" stop-color="#ffe066"></stop><stop offset="62%" stop-color="#ffc21b"></stop><stop offset="100%" stop-color="#ef9c00"></stop></radialgradient>
+<radialgradient cx="28%" cy="20%" id="ki-desktop-cyan" r="95%"><stop offset="0%" stop-color="#1cd5ed"></stop><stop offset="62%" stop-color="#00a7d4"></stop><stop offset="100%" stop-color="#0578b6"></stop></radialgradient>
+<radialgradient cx="28%" cy="20%" id="ki-desktop-teal" r="95%"><stop offset="0%" stop-color="#13e4d0"></stop><stop offset="62%" stop-color="#00baad"></stop><stop offset="100%" stop-color="#008f92"></stop></radialgradient>
+<radialgradient cx="28%" cy="20%" id="ki-desktop-green" r="95%"><stop offset="0%" stop-color="#19ecb4"></stop><stop offset="62%" stop-color="#00cd8e"></stop><stop offset="100%" stop-color="#009e7f"></stop></radialgradient>
+<filter color-interpolation-filters="sRGB" height="190%" id="ki-desktop-glow" width="190%" x="-45%" y="-45%"><fedropshadow dx="0" dy="0" flood-color="#26cff2" flood-opacity=".30" stddeviation="2.5"></fedropshadow></filter>
+<marker id="ki-desktop-arrow" markerheight="5" markerwidth="5" orient="auto" refx="8" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10Z" fill="#049da9"></path></marker>
+</defs>
+<path class="ki-connection" d="M542 376 C558 384 572 387 582 386" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M541 484 C569 470 569 414 584 392" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M680 386 L714 386" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M811 386 L845 386" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M937 386 L971 386" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M1068 376 C1090 352 1105 330 1127 315" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M1068 392 C1090 414 1106 442 1128 456" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M907 336 C974 290 1056 268 1121 283" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection ki-connection-gold" d="M1038 466 C1070 489 1103 486 1131 475" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection ki-connection-gold" d="M1192 383 C1215 401 1216 414 1193 427" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M1217 306 L1273 306" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M1360 306 L1426 306" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M1217 465 L1270 465" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<path class="ki-connection" d="M1360 465 L1425 465" marker-end="url(#ki-desktop-arrow)" stroke-dasharray="6 5" stroke-width="2.2"></path>
+<g class="ki-node" data-node="mail" transform="translate(507 373)"><circle fill="url(#ki-desktop-navy)" filter="url(#ki-desktop-glow)" r="31" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#70d4ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.7130)"><rect height="22" rx="2" width="32" x="-16" y="-11"></rect><path d="M-15 -9 L0 3 L15 -9 M-15 10 L-5 0 M15 10 L5 0"></path></g>
+</g>
+<g class="ki-node" data-node="pdf" transform="translate(507 485)"><circle fill="url(#ki-desktop-navy)" filter="url(#ki-desktop-glow)" r="31" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#ffe342" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.7130)"><path d="M-11 -17 H4 L13 -8 V17 H-11 Z M4 -17 V-8 H13 M-6 -2 H8 M-6 4 H8 M-6 10 H3"></path></g>
+</g>
+<g class="ki-node" data-node="1" transform="translate(635 385)"><circle fill="url(#ki-desktop-blue)" filter="url(#ki-desktop-glow)" r="41" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.8610)"><path d="M-2 -15 C0 -5 3 -2 12 1 C3 3 0 6 -2 16 C-4 6 -7 3 -16 1 C-7 -2 -4 -5 -2 -15Z"></path><path d="M12 -19 C13 -14 14 -13 18 -12 C14 -11 13 -10 12 -6 C11 -10 10 -11 6 -12 C10 -13 11 -14 12 -19Z"></path><path d="M-16 9 C-15 13 -14 14 -10 15 C-14 16 -15 17 -16 21 C-17 17 -18 16 -22 15 C-18 14 -17 13 -16 9Z"></path></g>
+<circle cx="28.29" cy="-28.29" fill="#ffffff" r="11.07" stroke="#d7f8ff" stroke-width="1"></circle><text fill="#1454b6" font-family="Arial,Helvetica,sans-serif" font-size="14.94" font-weight="700" text-anchor="middle" x="28.29" y="-24.08">1</text>
+</g>
+<g class="ki-node" data-node="2" transform="translate(768 385)"><circle fill="url(#ki-desktop-amber)" filter="url(#ki-desktop-glow)" r="41" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.8610)"><path d="M-2 -15 C0 -5 3 -2 12 1 C3 3 0 6 -2 16 C-4 6 -7 3 -16 1 C-7 -2 -4 -5 -2 -15Z"></path><path d="M12 -19 C13 -14 14 -13 18 -12 C14 -11 13 -10 12 -6 C11 -10 10 -11 6 -12 C10 -13 11 -14 12 -19Z"></path><path d="M-16 9 C-15 13 -14 14 -10 15 C-14 16 -15 17 -16 21 C-17 17 -18 16 -22 15 C-18 14 -17 13 -16 9Z"></path></g>
+<circle cx="28.29" cy="-28.29" fill="#ffffff" r="11.07" stroke="#d7f8ff" stroke-width="1"></circle><text fill="#1454b6" font-family="Arial,Helvetica,sans-serif" font-size="14.94" font-weight="700" text-anchor="middle" x="28.29" y="-24.08">2</text>
+</g>
+<g class="ki-node" data-node="3" transform="translate(896 384)"><circle fill="url(#ki-desktop-cyan)" filter="url(#ki-desktop-glow)" r="41" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.8610)"><path d="M-2 -15 C0 -5 3 -2 12 1 C3 3 0 6 -2 16 C-4 6 -7 3 -16 1 C-7 -2 -4 -5 -2 -15Z"></path><path d="M12 -19 C13 -14 14 -13 18 -12 C14 -11 13 -10 12 -6 C11 -10 10 -11 6 -12 C10 -13 11 -14 12 -19Z"></path><path d="M-16 9 C-15 13 -14 14 -10 15 C-14 16 -15 17 -16 21 C-17 17 -18 16 -22 15 C-18 14 -17 13 -16 9Z"></path></g>
+<circle cx="28.29" cy="-28.29" fill="#ffffff" r="11.07" stroke="#d7f8ff" stroke-width="1"></circle><text fill="#1454b6" font-family="Arial,Helvetica,sans-serif" font-size="14.94" font-weight="700" text-anchor="middle" x="28.29" y="-24.08">3</text>
+</g>
+<g class="ki-node" data-node="4" transform="translate(1026 384)"><circle fill="url(#ki-desktop-amber)" filter="url(#ki-desktop-glow)" r="40" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.8400)"><path d="M-2 -15 C0 -5 3 -2 12 1 C3 3 0 6 -2 16 C-4 6 -7 3 -16 1 C-7 -2 -4 -5 -2 -15Z"></path><path d="M12 -19 C13 -14 14 -13 18 -12 C14 -11 13 -10 12 -6 C11 -10 10 -11 6 -12 C10 -13 11 -14 12 -19Z"></path><path d="M-16 9 C-15 13 -14 14 -10 15 C-14 16 -15 17 -16 21 C-17 17 -18 16 -22 15 C-18 14 -17 13 -16 9Z"></path></g>
+<circle cx="27.60" cy="-27.60" fill="#ffffff" r="10.80" stroke="#d7f8ff" stroke-width="1"></circle><text fill="#1454b6" font-family="Arial,Helvetica,sans-serif" font-size="14.58" font-weight="700" text-anchor="middle" x="27.60" y="-23.50">4</text>
+</g>
+<g class="ki-node" data-node="5" transform="translate(1174 306)"><circle fill="url(#ki-desktop-teal)" filter="url(#ki-desktop-glow)" r="39" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.8190)"><path d="M-2 -15 C0 -5 3 -2 12 1 C3 3 0 6 -2 16 C-4 6 -7 3 -16 1 C-7 -2 -4 -5 -2 -15Z"></path><path d="M12 -19 C13 -14 14 -13 18 -12 C14 -11 13 -10 12 -6 C11 -10 10 -11 6 -12 C10 -13 11 -14 12 -19Z"></path><path d="M-16 9 C-15 13 -14 14 -10 15 C-14 16 -15 17 -16 21 C-17 17 -18 16 -22 15 C-18 14 -17 13 -16 9Z"></path></g>
+<circle cx="26.91" cy="-26.91" fill="#ffffff" r="10.53" stroke="#d7f8ff" stroke-width="1"></circle><text fill="#1454b6" font-family="Arial,Helvetica,sans-serif" font-size="14.22" font-weight="700" text-anchor="middle" x="26.91" y="-22.91">5</text>
+</g>
+<g class="ki-node" data-node="6" transform="translate(1174 466)"><circle fill="url(#ki-desktop-green)" filter="url(#ki-desktop-glow)" r="39" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.8190)"><path d="M-2 -15 C0 -5 3 -2 12 1 C3 3 0 6 -2 16 C-4 6 -7 3 -16 1 C-7 -2 -4 -5 -2 -15Z"></path><path d="M12 -19 C13 -14 14 -13 18 -12 C14 -11 13 -10 12 -6 C11 -10 10 -11 6 -12 C10 -13 11 -14 12 -19Z"></path><path d="M-16 9 C-15 13 -14 14 -10 15 C-14 16 -15 17 -16 21 C-17 17 -18 16 -22 15 C-18 14 -17 13 -16 9Z"></path></g>
+<circle cx="26.91" cy="-26.91" fill="#ffffff" r="10.53" stroke="#d7f8ff" stroke-width="1"></circle><text fill="#1454b6" font-family="Arial,Helvetica,sans-serif" font-size="14.22" font-weight="700" text-anchor="middle" x="26.91" y="-22.91">6</text>
+</g>
+<g class="ki-node" data-node="crm" transform="translate(1325 306)"><circle fill="url(#ki-desktop-navy)" filter="url(#ki-desktop-glow)" r="31" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#10e4ee" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.7130)"><rect height="32" rx="2" width="24" x="-12" y="-16"></rect><path d="M-7 -10 H7 M-7 -4 H7 M-7 2 H7 M-7 8 H3"></path></g>
+</g>
+<g class="ki-node" data-node="archive" transform="translate(1325 465)"><circle fill="url(#ki-desktop-navy)" filter="url(#ki-desktop-glow)" r="31" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#73d5ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.7130)"><path d="M-8 -15 H7 L18 7 V15 H-18 V7 Z M-8 -15 L2 5 H17 M-17 7 H17"></path></g>
+</g>
+<g class="ki-node" data-node="check" transform="translate(1480 306)"><circle fill="url(#ki-desktop-navy)" filter="url(#ki-desktop-glow)" r="31" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#06e9bc" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.7130)"><rect height="32" rx="5" width="30" x="-15" y="-16"></rect><path d="M-9 0 L-2 7 L10 -8"></path></g>
+</g>
+<g class="ki-node" data-node="check" transform="translate(1480 465)"><circle fill="url(#ki-desktop-navy)" filter="url(#ki-desktop-glow)" r="31" stroke="#ffffff" stroke-width="2.8"></circle><g fill="none" stroke="#06e9bc" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" transform="scale(0.7130)"><rect height="32" rx="5" width="30" x="-15" y="-16"></rect><path d="M-9 0 L-2 7 L10 -8"></path></g>
+</g>
+<text class="ki-label" font-size="15" text-anchor="middle" x="507" y="421">Postfach</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="507" y="437">Anfragen</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="507" y="535">PDF</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="507" y="551">Rechnungen</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="635" y="443">KI: Lesen</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="635" y="459">Inhalte erkennen</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="768" y="443">KI: Auslesen</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="768" y="459">Daten erfassen</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="896" y="443">KI: Prüfen</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="896" y="459">Fehler finden</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="1026" y="443">KI: Zuordnen</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="1026" y="459">Schritte steuern</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="1174" y="364">KI: CRM-Agent</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="1174" y="380">Kontakte abgleichen</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="1174" y="525">KI: Ablage-Agent</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="1174" y="541">Dokumente sortieren</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="1325" y="355">CRM</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="1325" y="371">Aktualisiert</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="1325" y="514">Archiv</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="1325" y="530">Abgelegt</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="1480" y="355">Erledigt</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="1480" y="371">Kontakt gepflegt</text>
+<text class="ki-label" font-size="15" text-anchor="middle" x="1480" y="514">Erledigt</text>
+<text class="ki-label-sub" font-size="13" text-anchor="middle" x="1480" y="530">Datei gesichert</text>
+<rect class="ki-badge" height="26" rx="13.0" width="169" x="466" y="132"></rect>
+<text class="ki-eyebrow" font-size="11" text-anchor="middle" x="550.5" y="148.64">02 / AUTOMATISIERT</text>
+<text class="ki-heading" font-size="43" x="466" y="212">Mehrere KI-Agenten.</text>
+<text class="ki-heading ki-heading-accent" font-size="43" x="466" y="255">Gemeinsam automatisiert.</text>
+<rect class="ki-caption-box" height="39" rx="13" width="716" x="634" y="680"></rect>
+<text class="ki-caption" font-size="16" text-anchor="middle" x="992.0" y="705">Die KI-Module prüfen, geben Daten weiter und stimmen ihre Aufgaben untereinander ab.</text>
+</svg>
