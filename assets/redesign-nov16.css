@@ -1,9 +1,7 @@
 /* Genschel Automation – original November 2026 structure, streamlined. */
-.dg-redesign-hero{overflow:hidden!important; isolation:isolate; padding-top:clamp(68px,7vw,110px)!important; padding-bottom:clamp(46px,6vw,74px)!important;}
+.dg-redesign-hero{overflow:hidden!important; isolation:isolate; padding-top:0!important; padding-bottom:clamp(46px,6vw,74px)!important;}
 .dg-redesign-hero .cinematic-copy{position:relative;z-index:1;max-width:1250px;}
-.dg-hero-network{position:absolute;inset:0 0 auto; height:clamp(360px,39vw,640px); z-index:0;pointer-events:none;overflow:hidden; opacity:.26; -webkit-mask-image:linear-gradient(to right,transparent 0%,black 16%,black 84%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,black 16%,black 84%,transparent 100%);}
-.dg-hero-network img{display:block;width:100%;height:100%;object-fit:contain;object-position:center 43%;filter:saturate(.8) contrast(.82);}
-.dg-redesign-hero h1{position:relative;text-shadow:0 1px 7px rgba(250,249,246,.95),0 0 18px rgba(250,249,246,.88); margin-bottom:36px!important;}
+.dg-redesign-hero h1{position:relative;text-shadow:none; margin-bottom:36px!important;}
 .dg-hero-customer-photo{position:relative; margin:0 0 clamp(25px,4vw,46px); width:100%; overflow:hidden; border-radius:30px; border:1px solid #D8E5E3;background:#ECF3F2;box-shadow:0 14px 46px rgba(26,73,86,.085);}
 .dg-hero-customer-photo img{display:block;width:100%;height:clamp(250px,34vw,490px);object-fit:cover;object-position:center 48%;}
 
@@ -50,23 +48,27 @@
 .dg-testimonial-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
 .dg-review{background:#fff;border:1px solid #D7E3E3;border-radius:24px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;}
 .dg-review p{font-size:16px;line-height:1.7;margin:0 0 24px;}.dg-review footer{font-weight:750;}
-/* Existing AI diagram starts visible; remove chaotic phase and prolonged scroll reveal. */
-#start-animation.dg-story-static{height:auto!important;min-height:0!important;--story-progress:1!important;--p:1!important;background:#d5e7ed;}
-#start-animation.dg-story-static .story-sticky{position:relative!important;top:auto!important;height:clamp(410px,52vw,690px)!important;min-height:0!important;max-height:none!important;--p:1!important;--story-progress:1!important;}
-#start-animation.dg-story-static .story-stage{position:absolute!important;inset:0!important;height:100%!important;}
-#start-animation.dg-story-static .ki-workflow-scene{display:block!important;visibility:visible!important;opacity:1!important;transform:none!important;z-index:3!important;}
-#start-animation.dg-story-static .story-desk,#start-animation.dg-story-static .story-transition,#start-animation.dg-story-static .story-scroll-hint,#start-animation.dg-story-static .story-progress,#start-animation.dg-story-static .story-skip-link{display:none!important;}
-#start-animation.dg-story-static .ki-pastel-background{opacity:1!important;}
+/* The original moving pastel background spans the diagram and heading.
+   Normal document flow keeps the headline below the complete network. */
+.dg-hero-intro{position:relative;isolation:isolate;overflow:hidden;padding-top:clamp(20px,2.2vw,34px);background:#c6dcec;}
+.dg-hero-intro>.ki-pastel-background{opacity:1;}
+.dg-hero-heading{padding-top:clamp(18px,2.2vw,32px);padding-bottom:clamp(28px,3.5vw,50px);}
+.dg-hero-heading .eyebrow{color:#173e49;margin-bottom:18px;}
+.dg-hero-heading h1{margin-bottom:0!important;}
+.dg-hero-details{padding-top:clamp(28px,3.5vw,50px);}
+#start-animation.dg-story-static{width:min(1250px,calc(100% - 48px));margin:0 auto;height:auto!important;min-height:0!important;--story-progress:1!important;--p:1!important;background:transparent;}
+#start-animation.dg-story-static .story-sticky{position:relative!important;top:auto!important;display:block;height:auto!important;min-height:0!important;max-height:none!important;--p:1!important;--story-progress:1!important;overflow:visible;}
+#start-animation.dg-story-static .story-stage{position:relative;width:100%;height:auto;background:transparent;overflow:visible;}
+#start-animation.dg-story-static .ki-workflow-scene{position:relative;inset:auto;display:block;visibility:visible;opacity:1;transform:none;overflow:visible;background:transparent;}
+#start-animation.dg-story-static .ki-artwork{width:100%;height:auto;}
+#start-animation.dg-story-static .ki-artwork-desktop{aspect-ratio:1090 / 404;}
+#start-animation.dg-story-static .ki-artwork-mobile{aspect-ratio:790 / 1185;}
 @media(max-width:860px){
- .dg-hero-network{height:430px;opacity:.19;}
  .dg-problem-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
  .dg-value-grid{grid-template-columns:1fr;}
  .dg-value-card{min-height:0;}
 }
 @media(max-width:650px){
- .dg-redesign-hero{padding-top:55px!important;}
- .dg-hero-network{height:330px;opacity:.14;}
- .dg-redesign-hero h1{font-size:clamp(41px,10.6vw,62px)!important;}
  .dg-hero-customer-photo{border-radius:18px;}
  .dg-hero-customer-photo img{height:270px;object-position:center 45%;}
  
@@ -77,8 +79,18 @@
  .dg-problem-card{min-height:116px;padding:14px 9px;border-radius:17px;}
  .dg-problem-card strong{font-size:15px;}
  .dg-problem-card span{font-size:12px;}
- .dg-solution-links{grid-template-columns:1fr;gap:10px;}
- .dg-solution-link{min-height:142px;}
- #start-animation.dg-story-static .story-sticky{height:clamp(380px,116vw,540px)!important;}
+ .dg-solution-links{grid-template-columns:minmax(0,1fr);gap:10px;}
+ .dg-solution-link{min-width:0;min-height:142px;}
+ .dg-solution-link strong{max-width:100%;overflow-wrap:anywhere;}
 }
 @media(prefers-reduced-motion:reduce){.dg-solution-link{transition:none!important;}}
+
+@media(max-width:900px) and (orientation:portrait){
+ #start-animation.dg-story-static{max-width:440px;}
+}
+@media(max-width:650px){
+ #start-animation.dg-story-static{width:calc(100% - 32px);}
+ .dg-hero-heading{padding-top:22px;}
+ .dg-hero-heading .eyebrow{line-height:1.6;margin-bottom:16px;}
+ .dg-hero-heading h1{font-size:clamp(36px,9.8vw,62px)!important;overflow-wrap:break-word;}
+}
