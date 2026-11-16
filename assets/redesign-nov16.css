@@ -94,3 +94,8 @@
  .dg-hero-heading .eyebrow{line-height:1.6;margin-bottom:16px;}
  .dg-hero-heading h1{font-size:clamp(36px,9.8vw,62px)!important;overflow-wrap:break-word;}
 }
+
+/* Network relocated intact immediately before the FAQ. */
+.dg-network-section{padding-bottom:clamp(24px,3vw,44px);}
+.dg-redesign-hero>.dg-hero-heading{padding-top:clamp(55px,7vw,100px);padding-bottom:0;}
+.dg-redesign-hero>.dg-hero-details{padding-top:36px;}
