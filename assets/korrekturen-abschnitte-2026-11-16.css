@@ -1,0 +1,12 @@
+/* Aktualisierung 16.11.2026: Abschnittszusammenlegung, Bewertungen. */
+.dg-pilot-cta-section{padding:clamp(20px,3.5vw,52px) 0 clamp(25px,4vw,55px);background:#fbfaf7;scroll-margin-top:100px;}
+.dg-pilot-cta-section .mid-cta{margin:0;}
+/* Gleicher, bereits für den Pilot-CTA und die Leistungskarten verwendeter Verlauf. */
+.dg-testimonials .dg-review-card.dg-review-card--featured{background:linear-gradient(110deg,#E9F3F4,#F9FCFB 66%,#FFF8E7);color:#223b44;border-color:#d7e4e5;}
+.dg-testimonials .dg-review-card.dg-review-card--featured .dg-review-type{color:#1d7285;}
+.dg-testimonials .dg-review-card.dg-review-card--featured .dg-review-author{border-color:#dae5e5;}
+.dg-testimonials .dg-review-card.dg-review-card--featured .dg-review-author-icon{background:#e9f3f5;color:#165d70;}
+.dg-review-rating{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:5px;}
+.dg-rating-stars{font-size:19px;letter-spacing:1px;line-height:1;color:#e78b17;white-space:nowrap;}
+.dg-rating-score{font-size:15px;font-weight:650;line-height:1.3;color:#596d74;}
+@media(max-width:620px){.dg-pilot-cta-section{padding:16px 0 28px;}.dg-review-rating{gap:6px;}.dg-rating-stars{font-size:18px;}}
