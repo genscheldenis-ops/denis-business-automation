@@ -1,16 +1,16 @@
 /* Genschel Automation – original November 2026 structure, streamlined. */
 .dg-redesign-hero{overflow:hidden!important; isolation:isolate; padding-top:clamp(68px,7vw,110px)!important; padding-bottom:clamp(46px,6vw,74px)!important;}
 .dg-redesign-hero .cinematic-copy{position:relative;z-index:1;max-width:1250px;}
-.dg-hero-network{position:absolute;inset:0 0 auto; height:clamp(360px,39vw,640px); z-index:0;pointer-events:none;overflow:hidden; opacity:.12; -webkit-mask-image:linear-gradient(to bottom,black 0%,black 68%,transparent 100%);mask-image:linear-gradient(to bottom,black 0%,black 68%,transparent 100%);}
-.dg-hero-network img{display:block; width:100%;height:100%; object-fit:cover;object-position:center; filter:saturate(.8) contrast(.85);}
-.dg-redesign-hero h1{position:relative;text-shadow:0 2px 12px rgba(250,249,246,.74); margin-bottom:36px!important;}
+.dg-hero-network{position:absolute;inset:0 0 auto; height:clamp(360px,39vw,640px); z-index:0;pointer-events:none;overflow:hidden; opacity:.26; -webkit-mask-image:linear-gradient(to right,transparent 0%,black 16%,black 84%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,black 16%,black 84%,transparent 100%);}
+.dg-hero-network img{display:block;width:100%;height:100%;object-fit:contain;object-position:center 43%;filter:saturate(.8) contrast(.82);}
+.dg-redesign-hero h1{position:relative;text-shadow:0 1px 7px rgba(250,249,246,.95),0 0 18px rgba(250,249,246,.88); margin-bottom:36px!important;}
 .dg-hero-customer-photo{position:relative; margin:0 0 clamp(25px,4vw,46px); width:100%; overflow:hidden; border-radius:30px; border:1px solid #D8E5E3;background:#ECF3F2;box-shadow:0 14px 46px rgba(26,73,86,.085);}
 .dg-hero-customer-photo img{display:block;width:100%;height:clamp(250px,34vw,490px);object-fit:cover;object-position:center 48%;}
-.dg-hero-customer-photo figcaption{position:absolute;bottom:10px;right:12px;font-size:11px;line-height:1.4;padding:5px 9px;border-radius:9px;background:rgba(250,249,246,.91);color:#37545f;}
+
 .dg-redesign-hero .lead{font-size:clamp(18px,1.55vw,23px)!important;max-width:1010px!important;margin-bottom:24px!important;}
 .dg-hero-trust{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:#fff;border:1px solid #DCE8E7;border-radius:18px;padding:15px 20px;margin:0 0 28px;}
 .dg-trust-faces{display:flex;min-width:73px;padding-left:7px;}
-.dg-trust-faces span{display:block;width:41px;height:41px;border:3px solid white;border-radius:50%;background-image:url('team-im-buero-symbolbild.webp');background-size:175px auto;background-repeat:no-repeat;box-shadow:0 2px 8px #294d5a2a;}
+.dg-trust-faces span{display:block;width:41px;height:41px;border:3px solid white;border-radius:50%;background-image:url('team-im-buero-symbolbild.webp?v=20261116b');background-size:175px auto;background-repeat:no-repeat;box-shadow:0 2px 8px #294d5a2a;}
 .dg-trust-faces span:first-child{background-position:-35px -21px;}
 .dg-trust-faces span:last-child{margin-left:-11px;background-position:-110px -19px;}
 .dg-trust-copy{display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px;}
@@ -58,18 +58,18 @@
 #start-animation.dg-story-static .story-desk,#start-animation.dg-story-static .story-transition,#start-animation.dg-story-static .story-scroll-hint,#start-animation.dg-story-static .story-progress,#start-animation.dg-story-static .story-skip-link{display:none!important;}
 #start-animation.dg-story-static .ki-pastel-background{opacity:1!important;}
 @media(max-width:860px){
- .dg-hero-network{height:430px;opacity:.09;}
+ .dg-hero-network{height:430px;opacity:.19;}
  .dg-problem-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
  .dg-value-grid{grid-template-columns:1fr;}
  .dg-value-card{min-height:0;}
 }
 @media(max-width:650px){
  .dg-redesign-hero{padding-top:55px!important;}
- .dg-hero-network{height:330px;opacity:.08;}
+ .dg-hero-network{height:330px;opacity:.14;}
  .dg-redesign-hero h1{font-size:clamp(41px,10.6vw,62px)!important;}
  .dg-hero-customer-photo{border-radius:18px;}
  .dg-hero-customer-photo img{height:270px;object-position:center 45%;}
- .dg-hero-customer-photo figcaption{font-size:9px;right:8px;bottom:8px;max-width:90%;}
+ 
  .dg-hero-trust{gap:10px;padding:14px;}
  .dg-trust-copy{min-width:130px;}
  .dg-trust-link{margin-left:0;}
