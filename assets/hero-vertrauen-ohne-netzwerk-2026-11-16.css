@@ -1,0 +1,48 @@
+/* Genschel Automation – 16.11.2026: Kundenstimmen-Mini-Element und Layout nach Entfernen der KI-Netzwerkszene. */
+.dg-redesign-hero .dg-hero-trust {
+  display:flex;
+  align-items:center;
+  gap:clamp(12px,2vw,25px);
+  padding:clamp(15px,2vw,20px);
+  flex-wrap:wrap;
+  background:linear-gradient(110deg,#E9F3F4,#F9FCFB 66%,#FFF8E7);
+}
+.dg-redesign-hero .dg-hero-trust .dg-trust-copy {flex:1 1 290px;min-width:220px;}
+.dg-redesign-hero .dg-hero-trust .dg-trust-link {margin-left:0; white-space:nowrap;}
+.dg-customer-proof {
+  display:flex;align-items:center;gap:12px; flex:0 0 auto;
+  padding:9px 15px 9px 10px;
+  background:rgba(255,255,255,.77);
+  border:1px solid #d8e5e5;
+  border-radius:999px;
+  box-shadow:0 2px 12px rgba(25,79,90,.035);
+  text-decoration:none;
+  color:#234955;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.dg-customer-proof:hover,.dg-customer-proof:focus-visible {box-shadow:0 5px 17px rgba(25,79,90,.12); transform:translateY(-1px);}
+.dg-customer-proof:focus-visible {outline:3px solid #e4a83a;outline-offset:3px;}
+.dg-proof-initials {display:flex;align-items:center; padding-left:7px;}
+.dg-proof-initials span {
+  display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:50%;border:2px solid white;
+  margin-left:-7px;
+  color:#155a70;font-size:13px;font-weight:800;
+  letter-spacing:-.02em;background:#d3e7e8;
+}
+.dg-proof-initials span:nth-child(2) {background:#f8e9bc;color:#7a5417;}
+.dg-proof-initials span:nth-child(3) {background:#cde8dc;color:#276353;}
+.dg-proof-label {display:flex;flex-direction:column;gap:2px;line-height:1.2;}
+.dg-proof-label strong{font-size:14px;color:#224e5b;font-weight:780;}
+.dg-proof-label small{font-size:12px;color:#5a737a;}
+@media(max-width:830px){
+ .dg-redesign-hero .dg-hero-trust .dg-trust-copy{flex:1 1 100%;}
+ .dg-redesign-hero .dg-hero-trust .dg-trust-link{margin-left:auto;}
+}
+@media(max-width:460px){
+ .dg-redesign-hero .dg-hero-trust{gap:12px;}
+ .dg-redesign-hero .dg-hero-trust .dg-trust-copy{min-width:0;}
+ .dg-customer-proof {width:100%;border-radius:16px;justify-content:flex-start;}
+ .dg-redesign-hero .dg-hero-trust .dg-trust-link{margin-left:0;}
+}
+@media(prefers-reduced-motion:reduce){.dg-customer-proof{transition:none;}}
